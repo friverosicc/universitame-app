@@ -12,7 +12,6 @@ Tendrás la libertad de resolver tus dudas, compartir tus conocimientos, consejo
 
 ## Quickstart
 
-  * Descarga este proyecto desde https://bitbucket.org/oinkmypork/universitame-app
   * Run `bower install` 
   * Run `npm install`
   
