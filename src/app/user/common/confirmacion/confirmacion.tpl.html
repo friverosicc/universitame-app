@@ -1,0 +1,16 @@
+<div 	class="alert text-center" 
+		ng-class="[type ? 'alert-' + type : null]"
+		ng-controller="confirmacionController"
+		tabindex="-1" >  
+	<strong>
+		<span ng-bind="content"></span>
+	</strong>
+
+	<button class="btn btn-link btn-confirmation white" type="button" ng-click="cancelar()" ng-autofocus="{{open}}">
+		<i class="fa fa-close"></i>
+	</button>
+
+	<button class="btn btn-link btn-confirmation white" type="button" ng-click="aceptar()">
+		<i class="fa fa-check"></i>
+	</button>
+</div>

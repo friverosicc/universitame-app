@@ -1,0 +1,42 @@
+@mixin transition($time) {
+	-webkit-transition: all ($time) ease;
+	-moz-transition: all ($time) ease;
+	-o-transition: all ($time) ease;
+	transition: all ($time) ease;
+}
+
+@mixin vertical-align {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+@mixin scale($scale) {
+	-webkit-transform: scale($scale);
+	-moz-transform: scale($scale);
+	-o-transform: scale($scale);
+	transform: scale($scale);
+}
+
+@mixin box-shadow($shadow) {
+	-webkit-box-shadow: $shadow;
+	-moz-box-shadow: $shadow;
+	box-shadow: $shadow;
+}
+// @include box-shadow(0px 1px 2px 0px rgba(0,0,0,0.3));
+
+@mixin animation-fadein($time) {
+	-webkit-animation: fadeIn $time;
+	-moz-animation: fadeIn $time;
+	-ms-animation: fadeIn $time;
+	animation: fadeIn $time;
+}
+
+@mixin animation-fadeout($time) {
+	-webkit-animation: fadeOut $time;
+	-moz-animation: fadeOut $time;
+	-ms-animation: fadeOut $time;
+	animation: fadeOut $time;
+}

@@ -1,0 +1,139 @@
+<!-- Resultados -->
+<h4 class="main-results dialogue" ng-if="camposFiltro" ng-bind-html="camposFiltro"></h4>
+<!-- Fin Resultados -->
+
+
+<div class="col-xs-12" >		
+	<!-- Nav Posts -->
+	<div class="nav-special-filters">		
+		<div class="nav-filters">
+			<a ui-sref-active="active" ui-sref="home.confesiones({ ordenar : '', filtrar : ''})">Recientes</a>
+			<a ui-sref-active="active" ui-sref="home.confesiones({ ordenar : 'me', filtrar : '' })">Mejor Evaluadas</a>			
+		</div>
+	</div>
+	<!-- Fin Nav Posts -->		
+</div>
+
+<!-- No content -->
+<div class="col-xs-12" ng-if="sinContenido">
+	<h4 class="main-results">
+		Ouch! No hemos podido encontrar lo que buscas <i class="fa fa-frown-o"></i>
+	</h4>
+</div>
+<!-- End No content -->
+
+<div 	class="col-xs-12"  
+		style="padding:0px;" 
+		infinite-scroll="buscarMasPublicaciones()" 
+		infinite-scroll-distance="3" 
+		ng-if="!sinContenido">
+
+	<div ng-repeat="publicacion in publicaciones">
+
+		<!-- Publicaciones tipo Confesiones -->
+		<div 	class="post post-confession post-bar post-animation"
+				ng-if="publicacion.tipo === 'C'">
+
+			<div class="post-content" ng-click="irDetalleConfesion(publicacion._id);">
+				<!-- Profile information -->
+				<i class="fa fa-user-secret" style="font-size : 32px;"></i>
+				<label class="name name-profile" ng-if="!publicacion.usuario.nombre">An&oacute;nimo</label>	
+				<label class="name name-profile" ng-if="publicacion.usuario.nombre">{{publicacion.usuario.nombre}}</label>		
+
+				<label class="time"><i class="fa fa-clock-o"></i> </label>
+				<time class="time" am-time-ago="publicacion.fecha"></time>	
+
+				<!-- Puntuación en desktop -->
+				<!-- <div class="post-votes-top hidden-xs">
+					<a 	class="down-vote"
+						ng-class="{ 'down-vote-selected' : publicacion.usuarioReprueba }"
+						ng-click="evaluarPublicacion(false)">
+						<i class="fa fa-thumbs-down"></i>
+					</a>
+					<label>{{ publicacion.ranking }}</label>
+					<a 	class="up-vote"
+						ng-class="{ 'up-vote-selected' : publicacion.usuarioAprueba }"
+						ng-click="evaluarPublicacion(true)">
+						<i class="fa fa-thumbs-up"></i>
+					</a>
+				</div> -->
+
+				<!-- Contenido del Post -->
+				<div class="row">
+					<div class="post-content-space col-xs-12 col-sm-12">
+						<hr class="post-separator">
+						<p class="post-comment" ng-bind="extractoConfesion(publicacion.detalle)"></p>
+
+						<!-- Tags Post -->			
+						<div class="post-tags var-inline">
+							<i ng-if="mostrarTags(publicacion)" class="fa fa-tags"></i>
+
+							<label ng-repeat="tag in publicacion.tags">
+								<a 	ui-sref="hashtag({ tag : tag.substring(1, tag.length) })"  
+									ng-click="$event.stopPropagation();" 
+									ng-bind="tag">
+								</a>
+							</label>
+
+							<label ng-if="mostrarInstitucion(publicacion.institucion)">
+								<a href="" ng-click="$event.stopPropagation();">
+									<i class="fa fa-institution"></i>
+									{{publicacion.institucion.nombre}}
+								</a>
+							</label>
+							
+							<label ng-if="mostrarCarrera(publicacion.carrera)">
+								<a href="" ng-click="$event.stopPropagation();">
+									<i class="fa fa-graduation-cap"></i>
+									{{publicacion.carrera.nombre}}
+								</a>
+							</label>				
+						</div>
+					</div>
+					<!-- <div class="text-right col-xs-2 post-votes visible-xs">
+						<a 	class="up-vote"
+							ng-class="{ 'up-vote-selected' : publicacion.usuarioAprueba }"
+							ng-click="evaluarPublicacion(true)">
+							<i class="fa fa-thumbs-up"></i>
+						</a>
+
+						<label>{{ publicacion.ranking }}</label>
+
+						<a 	class="down-vote"
+							ng-class="{ 'down-vote-selected' : publicacion.usuarioReprueba }"
+							ng-click="evaluarPublicacion(false)">
+							<i class="fa fa-thumbs-down"></i>
+						</a>
+					</div> -->
+				</div>
+			</div>
+			<!-- Acciones Post -->
+			<div class="post-action clearfix" ng-click="irDetalleConfesion(publicacion._id);">
+				<div class="row">
+					<div class="col-xs-10">
+						<span class="post-action-link"><i class="fa fa-comments"></i>{{ publicacion.cantidad_comentarios }}</span>
+						<span class="post-action-link"><i class="fa fa-thumbs-up"></i>{{ publicacion.ranking }}</span>								
+					</div>
+					<div class="col-xs-2 text-right">
+						<a 	ng-click="$event.stopPropagation(); confirmarEliminarPublicacion(publicacion);" 
+							ng-if="publicacion.usuario.id_usuario === usuario.id"
+							class="post-action-link">					
+							<i class="fa fa-refresh fa-spin" ng-show="publicacion.eliminando"></i>
+							<i class="fa fa-trash" ng-hide="publicacion.eliminando"></i>										
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- FIN Publicaciones tipo Confesiones -->
+	</div>
+
+	<!-- Banner test -->
+	<!-- <div class="banner-test">
+		<h5 class="text-center">Publicidad test <a href="#">Link interesante de la publicidad</a></h5>
+	</div> -->	
+
+	<div class="post-loader text-center" ng-show="cargandoPublicaciones">
+		<span><i class="fa fa-circle-o-notch fa-spin"></i> Cargando más posts...</span>
+	</div>
+</div>

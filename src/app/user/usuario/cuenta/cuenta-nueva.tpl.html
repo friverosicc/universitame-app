@@ -1,0 +1,84 @@
+	<nav class="navbar navbar-fixed-top reg-header">
+		<div class="container">
+			<div class="text-center">
+				<a href="#"><img alt="Universitame" class="buzz" src="img/iso-logo.svg"></a>
+			</div>
+		</div>
+	</nav>
+	<div class="login-module">
+		<div class="login-content">
+			<div class="text-center">				
+				<h3 class="login-title login-title-blue">Crear Cuenta</h3>
+			</div>
+			
+			<form class="login-input" name="nuevaCuentaForm">
+				<input 	type="text"
+						name="nombre" 
+						class="form-control" 
+						placeholder="Nombre Completo" 
+						tabindex="1"						
+						autofocus
+						ng-required="true"
+						ng-model="usuario.nombre"></input>
+				<p class="error" ng-show="showError(nuevaCuentaForm.nombre, 'required')">El nombre es requerido</p>
+
+				<input 	type="email" 
+						name="email"
+						class="form-control" 
+						placeholder="Correo Electrónico"
+						tabindex="2"
+						ng-required="true"
+						ng-model="usuario.email"></input>
+
+				<p class="error" ng-show="showError(nuevaCuentaForm.email, 'email')">No parece un correo correcto</p>
+				<p class="error" ng-show="showError(nuevaCuentaForm.email, 'required')">El correo es requerido</p>
+
+				<input 	type="password" 
+						name="password"
+						class="form-control" 
+						placeholder="Contraseña"
+						tabindex="3"
+						ng-required="true"
+						ng-model="usuario.password"></input>
+				<p class="error" ng-show="showError(nuevaCuentaForm.password, 'required')">La contraseña es requerida</p>
+
+				<input 	type="password" 
+						name="repassword"
+						class="form-control" 
+						placeholder="Repita Contraseña"
+						tabindex="4"
+						ng-required="true"
+						ng-model="usuario.repassword"></input>
+				<p class="error" ng-show="showError(nuevaCuentaForm.repassword, 'required')">Repetir la contraseña es obligatorio</p>
+				<p class="error" ng-hide="passwordIguales" ng-init="passwordIguales=true">Las contraseñas no son iguales</p>
+				<p class="error" ng-bind="msgServer"></p>
+			</form>
+
+			<a 	class="btn btn-primary btn-lg col-xs-12" 
+				style="margin-bottom: 10px;"
+				tabindex="5"
+				ng-disabled="!sePuedeGuardar()"
+				ng-click="guardarUsuario()"
+				ng-enter="guardarUsuario()">Crear Cuenta</a>
+
+			<div class="text-center">
+				<a href="#" id="login-forgot">Creando tu cuenta estás aceptando los<br>Términos y Condiciones de Servicio</a>
+			</div>
+			
+			<hr>
+
+			<div class="text-center">
+				<p id="login-dialog">¿Ya tienes cuenta?</p>
+			</div>
+
+			<div class="text-center">
+				<a ui-sref="login" class="login-title login-title-green" tabindex="6">Iniciar Sesión</a>
+			</div>
+		</div>
+
+		<div class="fb-bg" tabindex="7" ng-click="facebookLogin()" ng-enter="facebookLogin()">	
+			<a class="">
+				<i class="fa fa-facebook"></i> Ingresar con Facebook
+			</a>
+		</div>
+	</div>

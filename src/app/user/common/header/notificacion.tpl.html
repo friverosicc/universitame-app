@@ -1,0 +1,41 @@
+<div class="popover" tabindex="-1" ng-controller="notificacionController">
+	<div class="arrow"></div>
+	<h3 class="popover-title">Notificaciones</h3>
+
+	<div class="popover-content notif-content vertical-scroll" ng-show="cantidadNotificaciones > 0">
+		<!-- Notificación Individual -->
+		<div 	class="notif-individual"
+				ng-repeat="notificacion in notificaciones"> 
+			<span class="name">				
+				<span class="identifier" ng-class="{ 'question' : notificacion.tipo === 'p' }"></span>
+				<strong ng-bind="notificacion.usuario.nombre"
+						ng-if="notificacion.tipo === 'p'">
+				</strong>
+				
+				<strong ng-if="notificacion.tipo === 's'">
+					Univers&iacute;tame
+				</strong>
+					
+				<span>&nbsp</span>
+				<a 	ui-sref="detallePregunta({ idPregunta : notificacion.id_publicacion, titulo : '' })"
+					ng-click="eliminarNotificacion(notificacion._id)"
+					ng-show="notificacion.tipo === 'p'">
+					{{notificacion.descripcion}}
+				<a/>
+				
+				<a 	ng-click="desplegarSugerencia(notificacion)"
+					ng-show="notificacion.tipo === 's'">
+					{{notificacion.descripcion}}
+				<a/>
+			</span>
+			<br/>
+			<span class="time"><i class="fa fa-clock-o"></i> </span>
+			<time class="time" am-time-ago="notificacion.fecha"></time>
+			<span class="hide-mobile">·</span>
+			<button class="btn btn-sm btn-link hide-mobile" ng-click="eliminarNotificacion(notificacion._id)">Eliminar</button>
+		</div>
+	</div>
+	<div class="notif-individual" ng-show="cantidadNotificaciones === 0">
+		<h5 style="text-align: center;">No tienes nuevas notificaciones.</h5>
+	</div>	
+</div>

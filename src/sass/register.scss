@@ -1,0 +1,178 @@
+.reg-header {
+	background: $black;
+	padding: 5px 0;
+}
+
+.wizard {
+	margin: 15px 0;
+}
+
+.wiz-step {
+	background: $bg-light-gray;
+	padding: 7px 12px;
+	color: $light-gray;
+	border-radius: 30px;
+	margin: 0 5px;
+	text-decoration: none;
+	@include transition(0.25s);
+	&:hover{
+		text-decoration: none;
+		color: $light-gray;
+	}
+	&.active {
+		background: $green-base;
+		color: white;
+		&:hover {
+			background: darken($green-base, 10%);
+		}
+	}
+	&.past {
+		background: $blue-base;
+		color: white;
+		&:hover {
+			background: darken($blue-base, 10%);
+		}
+	}
+}
+
+.reg-title {
+	@include lato(700, 45px, $black);
+	margin-top: 120px;
+	strong {
+		color: $blue-base;
+	}
+	&.reg-section {
+		margin: 40px 0 50px;
+		font-size: 30px;
+	}
+}
+
+.reg-p {
+	@include lato(400, 18px, $gray);
+	margin-bottom: 80px;
+	margin-top: 10px;
+	&.reg-option {
+		margin-bottom: 50px;
+	}
+	&.reg-nomargin {
+		margin-bottom: 0 !important;
+	}
+	&.reg-special {
+		margin: 0 0 80px 0;
+		font-size: 16px;
+	}
+}
+
+#reg-explanation {
+	@include open-sans(400, 14px, $gray);
+	margin: 10px 0 160px 0;
+}
+
+.reg-img {
+	height: 100%;
+	width: auto;
+}
+
+.reg-link {
+	margin-bottom: 30px;
+	a {
+		@include lato(400, 18px, $gray);
+		@include transition(0.25s);
+		&:hover, &:focus {
+			background: $green-base;
+			padding: 5px 10px;
+			border-radius: 20px;
+			color: white;
+			text-decoration: none;
+			cursor: pointer;
+		}
+	}
+}
+
+.reg-buttons {
+	margin-bottom: 100px;
+	button, a {
+		margin: 0 5px;
+	}
+}
+
+.reg-form {
+	margin-top: 20px;
+	.input-special {
+		margin-bottom: 0 !important;
+	}
+	input, select, textarea, .ui-select-container {
+		margin: 10px 0;
+	}
+	textarea {
+		margin-bottom: 40px;
+	}
+	.btn-link {
+		margin-top: 14px;
+		i {
+			margin-right: 5px;
+		}
+	}
+}
+
+.reg-profile {
+	overflow: hidden;
+	height: 100px;
+	width: 100px;
+	border-radius: 100px;
+	margin: 0 auto 10px;
+	img {
+		height: auto;
+		max-width: 100%;
+	}
+}
+
+.reg-icn {
+	font-size: 10em;
+	@include transition(0.3s);
+	color: $light-gray;
+
+	&.reg-male {
+		&:hover, &:focus {
+			color: #55A1FA;
+		}
+	}
+
+	&.reg-male-active {
+		color: #55A1FA;
+	}
+
+	&.reg-female {
+		&:hover, &:focus {
+			color: $special-pink;
+		}
+	}
+
+	&.reg-female-active {
+		color: $special-pink;
+	}
+
+	&.reg-uni {
+		&:hover, &:focus {
+			color: $blue-base;
+		}
+	}
+
+	&.reg-uni-active {
+		color : $blue-base;
+	}
+
+	&.reg-futuni {
+		&:hover, &:focus {
+			color: $green-base;
+		}
+	}
+
+	&.reg-futuni-active {
+		color : $green-base;
+	}
+} 
+
+.input-nopad {
+	padding: 0;
+}

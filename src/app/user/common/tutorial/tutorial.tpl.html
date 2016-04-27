@@ -1,0 +1,73 @@
+<div class="modal tutorial" tabindex="-1" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Slide 1 -->
+		<div class="modal-content" ng-init="step = 0">
+			<div 	class="tut-module text-center bg-tutorial" 
+					ng-class="{ 'bg-brand' : step === 0, 'bg-blue' : step === 1 || step === 4, 'bg-purple' : step === 2, 'bg-black' : step === 3 }">
+
+				<!-- Títulos -->
+				<h1 ng-show="step === 0">Bienvenid@ a Universítame</h1>
+				<h1 ng-show="step === 1">¿Tienes dudas?</h1>
+				<h1 ng-show="step === 2">¿Quieres contar un secreto?</h1>
+				<h1 ng-show="step === 3">Ayúdanos a mejorar</h1>
+				<h1 ng-show="step === 4">Primera Tarea</h1>
+
+				<!-- Imágenes -->
+				<img ng-show="step === 0" src="img/tutorial/tut-brand.png" alt="Universítame">
+				<img ng-show="step === 1" src="img/tutorial/tut-pregunta.png" alt="Preguntas en Universítame">
+				<img ng-show="step === 2" src="img/tutorial/tut-confesion.png" alt="Preguntas en Universítame">
+				<img ng-show="step === 3" src="img/tutorial/tut-ayudanos.png" alt="Preguntas en Universítame">
+				<img ng-show="step === 4" src="img/tutorial/tut-tarea.png" alt="Preguntas en Universítame">
+
+				<!-- Círculos indicando ubicación -->
+				<div class="circles-slides">
+					<div ng-class="{ 'full' : step === 0 }" ng-click="step = 0" class="circle"></div>
+					<div ng-class="{ 'full' : step === 1 }" ng-click="step = 1" class="circle"></div>
+					<div ng-class="{ 'full' : step === 2 }" ng-click="step = 2" class="circle"></div>
+					<div ng-class="{ 'full' : step === 3 }" ng-click="step = 3" class="circle"></div>
+					<div ng-class="{ 'full' : step === 4 }" ng-click="step = 4" class="circle"></div>
+				</div>
+			</div>
+
+			<div class="tut-module">
+
+				<!-- Texto de ayuda -->
+				<p ng-show="step === 0">Universítame es la nueva comunidad donde tendrás la oportunidad de aclarar todas las dudas acerca de las Universidades y carreras, antes y durante esta etapa.</p>
+
+				<p ng-show="step === 1">Realiza cualquier tipo de preguntas en las que la comunidad de Universítame podrá ayudarte.
+				<br>
+				Dirige las preguntas a carreras o universidades específicas, evalúa estas preguntas y respuestas, elige la mejor, recomiéndala.
+				<br>
+				¡Mostremos lo que todos necesitan saber! </p>
+
+				<p ng-show="step === 2">No te reprimas, cuénta de manera completamente <strong>anónima</strong> lo que sucede dentro de las universidades...
+				<br>
+				Anímate y diviértete</p>
+
+				<p ng-show="step === 3">Universítame acaba de ver la luz y necesitamos de tus comentarios para entregarte lo mejor.
+				<br>
+				¿Tienes alguna sugerencia o comentario que pueda mejorar tu experiencia? ¡Lo esperamos! :)</p>
+
+				<p ng-show="step === 4">Ahora que estamos listos, crea tu primera pregunta con el hashtag <em>#HolaUniversitame</em>, y preséntate a esta gran comunidad :)</p>
+
+				<!-- Botones de avance y término -->
+				<div class="text-center" ng-show="step === 0">
+					<button class="btn btn-success" ng-click="step = step + 1">¡Entendido!</button>					
+				</div>
+				<div class="text-center" ng-show="step === 1">
+					<button class="btn btn-success" ng-click="step = step + 1">Bien, ¿Qué más?</button>					
+				</div>
+				<div class="text-center" ng-show="step === 2">
+					<button class="btn btn-success" ng-click="step = step + 1">Ok, interesante</button>					
+				</div>
+				<div class="text-center" ng-show="step === 3">
+					<button class="btn btn-success" ng-click="step = step + 1">Dale, siguiente</button>					
+				</div>
+				<div class="text-center" ng-hide="step != 4">
+					<button class="btn btn-success" ng-click="$hide()">¡Comencemos!</button>
+				</div>
+			</div>
+		</div>		
+	</div>
+</div>

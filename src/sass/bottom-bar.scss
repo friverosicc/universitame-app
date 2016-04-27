@@ -1,0 +1,33 @@
+//Bottom bar
+
+.bottom-bar {
+	@include gridle_show(mobile);
+	@include gridle_hide(tablet desktop);
+	background: $black;
+	position: fixed;
+	padding: 5px 0;
+	bottom: 0px;
+	width: 100%;
+	z-index: 10;
+	text-align: center;
+	.btn-group {
+		.btn-warning, .btn-primary {
+			min-width: 55px;
+			@include box-shadow(none);
+		}
+		.btn:first-child{
+			border-radius: 20px 0 0 20px;
+		}
+		.btn:last-child{
+			border-radius: 0 20px 20px 0;
+		}
+	}
+	.fa-search, .fa-heart, .fa-inbox {
+		color: white;
+	}
+	.badge {
+		background: $special-pink;
+		top: -8px;
+		left: -10px;
+	}
+}

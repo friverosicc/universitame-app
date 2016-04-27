@@ -1,0 +1,108 @@
+<!-- Contenido -->
+<div 	class="fade-in quick" 
+		infinite-scroll="buscarSugerencias()" 
+		infinite-scroll-distance="3" >
+
+	<div class="header-content">
+		<div class="clearfix">
+			<!-- <h4 class="pull-left">Sábado 2 de Abr.</h4> -->
+			
+			<div class="pull right nav-filters">
+				<a 	ui-sref-active="active" 
+					ui-sref="admin.sugerencias({ filtrar : '' })">
+					Todas
+				</a>
+				<a 	ui-sref-active="active"
+					ui-sref="admin.sugerencias({ filtrar : 're' })">
+					Respondidas
+				</a>
+				<a 	ui-sref-active="active"
+					ui-sref="admin.sugerencias({ filtrar : 'sr' })">
+					Sin Responder
+				</a>
+			</div>
+
+			<!-- <select class="form-control pull-right select-filter visible-xs">
+				<option>Todas</option>
+				<option>Respondidas</option>
+				<option>Sin Responder</option>
+			</select> -->
+		</div>
+	</div>
+
+	<div class="post" ng-repeat="sugerencia in sugerencias">
+
+		<div 	class="admin-messages"
+				data-animation="am-fade-and-scale"  
+				data-template="admin/sugerencia/detalle-sugerencia.tpl.html" 
+				data-container="body"
+				bs-modal="modal">
+
+			<div class="row">
+				<div class="profile col-sm-3">
+
+					<div class="post-img-profile" style="background-image: url({{sugerencia.usuario.photo}});"></div>
+
+					<a 	class="name name-link name-profile" 
+						ng-bind="sugerencia.usuario.nombre">
+					</a>
+
+					<label class="time"><i class="fa fa-clock-o"></i> </label>
+					<time class="time" am-time-ago="sugerencia.fecha"></time>
+					<div class="actions visible-xs pull-right">
+						<i class="fa fa-check-circle" ng-show="sugerencia.respondida"></i>
+						<a><i class="fa fa-ellipsis-v"></i></a>
+					</div>
+				</div>
+				<div class="subject col-sm-7" ng-bind="sugerencia.detalle">					
+				</div>
+				<div class="actions col-xs-2 hidden-xs text-right">
+					<i class="fa fa-check-circle" ng-show="sugerencia.respondida"></i>
+					<a><i class="fa fa-ellipsis-v"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- <div class="header-content">
+		<div class="clearfix">
+			<h4 class="pull-left">Viernes 1 de Abr.</h4>
+
+			<div class="pull right nav-filters hidden-xs">
+				<a class="active">Todas</a>
+				<a>Respondidas</a>
+				<a>Sin Responder</a>
+			</div>
+
+			<select class="form-control pull-right select-filter visible-xs">
+				<option>Todas</option>
+				<option>Respondidas</option>
+				<option>Sin Responder</option>
+			</select>
+		</div>
+	</div>
+
+	<div class="post">
+		<div class="admin-messages">
+			<div class="row">
+				<div class="profile col-sm-3">
+					<div class="post-img-profile"></div>
+					<a href="" class="name name-link name-profile">Camilo</a>
+					<label class="time"><i class="fa fa-clock-o"></i></label>
+					<time class="time">hace 2 días</time>
+					<div class="actions visible-xs pull-right">
+						<i class="fa fa-check-circle"></i>
+						<a href="#"><i class="fa fa-ellipsis-v"></i></a>
+					</div>
+				</div>
+				<div class="subject col-sm-7">
+					Keytar McSweeney's Williamsburg, readymade leggings try aosijaos oaisjoais isjioajso aosijoaisjo
+				</div>
+				<div class="actions col-xs-2 hidden-xs text-right">
+					<i class="fa fa-check-circle"></i>
+					<a href="#"><i class="fa fa-ellipsis-v"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> -->

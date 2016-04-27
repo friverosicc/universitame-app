@@ -1,0 +1,337 @@
+<!-- Header -->
+<div ui-view="app-header"></div>
+<!-- End Header -->
+
+<!-- Contenido eliminado -->
+<div class="container" ng-show="!existeContenido">
+	<div class="content-post">
+		<br/>
+		<div class="row">
+			<div class="post-content-space col-sm-2">
+				<img src="img/thief-gnome.svg" class="img-responsive" alt="Duende Universitame">
+			</div>
+			<div class="post-content-space col-sm-10">
+				<h2>Ups! El contenido que buscas fue borrado o simplemente ha sido robado por pequeños duendes de Universítame.</h2>
+				<button class="btn btn-success btn-sm" ng-click="goBack()">Volver</button>
+			</div>
+		</div>		
+	</div>
+</div>
+<!-- Fin - Contenido eliminado -->
+
+<div class="container" ng-show="existeContenido">
+	<div class="content-post">
+		<div class="row">
+			<div class="post post-question post-open post-default">
+				<div class="post-content post-bar">
+				<!-- Profile information -->
+					<div class="post-img-profile" style="background-image: url({{publicacion.usuario.photo}});"></div>
+					<a 	class="name name-link name-profile" 
+						data-template="user/usuario/perfil/modal-perfil.tpl.html" 
+						data-container="body"
+						bs-modal="modal"
+						ng-bind="publicacion.usuario.nombre">
+					</a>
+
+					<label class="time"><i class="fa fa-clock-o"></i> </label>
+					<time class="time" am-time-ago="publicacion.fecha"></time>
+
+					<!-- Puntuación en desktop -->
+					<div class="post-votes-top hidden-xs">
+						<a 	class="down-vote"
+							ng-class="{ 'down-vote-selected' : publicacion.usuarioReprueba }"
+							ng-click="evaluarPublicacion(false)">
+							<i class="fa fa-thumbs-down"></i>
+						</a>
+						<label>{{ publicacion.ranking }}</label>
+						<a 	class="up-vote"
+							ng-class="{ 'up-vote-selected' : publicacion.usuarioAprueba }"
+							ng-click="evaluarPublicacion(true)">
+							<i class="fa fa-thumbs-up"></i>
+						</a>
+					</div>
+			
+					<!-- Texto Post -->
+					<div class="row">
+						<div class="post-content-space col-xs-10 col-sm-12">
+							<hr class="post-separator">
+							<label class="post-title" ng-bind-html="publicacion.titulo | linky : '_blank' | universitameLinky : '_blank'"></label>
+							<p class="post-comment" ng-bind-html="publicacion.detalle | linky : '_blank' | universitameLinky : '_blank'"></p>
+						</div>
+						<div class="text-right col-xs-2 post-votes visible-xs">
+							<a 	class="up-vote"
+								ng-class="{ 'up-vote-selected' : publicacion.usuarioAprueba }"
+								ng-click="evaluarPublicacion(true)">
+								<i class="fa fa-thumbs-up"></i>
+							</a>
+
+							<label>{{ publicacion.ranking }}</label>
+
+							<a 	class="down-vote"
+								ng-class="{ 'down-vote-selected' : publicacion.usuarioReprueba }"
+								ng-click="evaluarPublicacion(false)">
+								<i class="fa fa-thumbs-down"></i>
+							</a>
+						</div>
+					</div>
+
+					<div class="clearfix">
+						<div class="row">
+							<div class="col-xs-10 post-tags var-inline">
+								<i ng-if="mostrarTags(publicacion)" class="fa fa-tags"></i>							
+								<label ng-if="mostrarInstitucion(publicacion.institucion)">
+									<a href="#">
+										<i class="fa fa-institution"></i>
+										{{publicacion.institucion.nombre}}
+									</a>
+								</label>
+								<label ng-if="mostrarCarrera(publicacion.carrera)">
+									<a href="#">
+										<i class="fa fa-graduation-cap"></i>
+										{{publicacion.carrera.nombre}}
+									</a>
+								</label>				
+							</div>
+							<div class="col-xs-2 text-right">
+								<a 	class="post-action-link"
+									ng-if="publicacion.usuario.id_usuario === usuario._id"
+									ng-click="eliminarPublicacion()">									
+									<i class="fa fa-refresh fa-spin" ng-show="publicacion.eliminando"></i>
+									<i class="fa fa-trash" ng-hide="publicacion.eliminando"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+
+				<div class="text-center post-comment-separator">
+					<label>
+						<i class="fa fa-comments"></i> Respuestas
+					</label>
+				</div>
+
+				<!-- Respuesta del post -->
+				<div class="post-comment-base" ng-repeat="respuesta in respuestas">
+					<div class="post-content" ng-class="{ 'answered' : respuesta.mejor_respuesta }">
+
+						<!-- Profile information -->
+						<div class="post-img-profile" style="background-image: url({{respuesta.usuario.photo}});"></div>
+							
+						<a 	class="name name-link name-profile"
+							data-template="user/usuario/perfil/modal-perfil.tpl.html" 
+							data-container="body"
+							bs-modal="modal"
+							ng-bind="respuesta.usuario.nombre">
+						</a>
+
+						<label class="time"><i class="fa fa-clock-o"></i> </label>
+						<time class="time" am-time-ago="respuesta.fecha"></time>
+
+						<div class="post-votes-top hidden-xs">
+							<a 	class="down-vote" 
+								ng-class="{ 'down-vote-selected' : respuesta.usuarioReprueba }"
+								ng-click="evaluarRespuesta(respuesta, false)">
+								<i class="fa fa-thumbs-down"></i>
+							</a>
+
+							<label>{{ respuesta.ranking }}</label>
+
+							<a 	class="up-vote" 
+								ng-class="{ 'up-vote-selected' : respuesta.usuarioAprueba }"
+								ng-click="evaluarRespuesta(respuesta, true)">
+								<i class="fa fa-thumbs-up"></i>
+							</a>
+						</div>
+						
+						<div class="row">
+							<div class="post-content-space col-xs-10 col-sm-12">
+								<!-- Fin Profile Information -->
+								<hr class="post-separator">
+								<!-- Comentario/Respuesta -->
+								<div>
+									<button ng-show="respuesta.mejor_respuesta" 
+											ng-class="{ 'user' : usuario._id === publicacion.usuario.id_usuario }"
+											ng-click="elegirMejorRespuesta(respuesta)"
+											class="btn post-action-link action-special success">
+									</button>
+
+									<button ng-hide="respuesta.mejor_respuesta || usuario._id != publicacion.usuario.id_usuario" 
+											ng-click="elegirMejorRespuesta(respuesta)"
+											class="btn btn-link post-action-link btn-choose-answer">
+										Elegir mejor Respuesta
+									</button>
+								</div>
+								<p class="post-comment" ng-bind-html="respuesta.respuesta  | linky : '_blank' | universitameLinky : '_blank'"></p>
+							</div>
+							<div class="pull-right col-xs-2 post-votes visible-xs">
+								<a 	class="up-vote" 
+									ng-class="{ 'up-vote-selected' : respuesta.usuarioAprueba }"
+									ng-click="evaluarRespuesta(respuesta, true)">									
+									<i class="fa fa-thumbs-up"></i>
+								</a>
+								<label>{{ respuesta.ranking}}</label>
+								<a 	class="down-vote" 
+									ng-class="{ 'down-vote-selected' : respuesta.usuarioReprueba }"
+									ng-click="evaluarRespuesta(respuesta, false)">
+									<i class="fa fa-thumbs-down"></i>
+								</a>
+							</div>
+						</div>
+						<div class="clearfix">
+							<div class="row">								
+								<div class="col-xs-10 new-comment" ng-show="mostrarNuevoComentario(respuesta.comentarios)">
+									<button class="btn btn-link"
+											ng-if="usuarioConectado"
+											ng-init="respuesta.mostrarFormularioComentario = false"
+											ng-click="respuesta.mostrarFormularioComentario = !respuesta.mostrarFormularioComentario">
+										Comentar
+									</button>
+								</div>
+								<div 	class="col-xs-8 col-xs-offset-2 new-comment" ng-show="!mostrarNuevoComentario(respuesta.comentarios)"
+										style="text-align:center;">
+									<button class="btn btn-link"
+											ng-hide="mostrarMasComentarios(respuesta)"
+											ng-click="buscarMasComentarios(respuesta)">
+										Mostrar comentarios anteriores
+									</button>
+								</div>
+
+								<div class="col-xs-2 text-right">
+									<a 	class="post-action-link"
+										ng-if="respuesta.usuario.id_usuario === usuario._id"
+										ng-click="eliminarRespuesta(respuesta)">
+										<i class="fa fa-trash" ng-hide="respuesta.eliminando"></i>
+										<i class="fa fa-refresh fa-spin" ng-show="respuesta.eliminando"></i>
+									</a>
+
+									<!-- <a 	class="post-action-link" 
+										data-title="Denunciar" 
+										ng-if="respuesta.usuario.email != usuario.email"
+										bs-tooltip>
+										<i class="fa fa-flag"></i>
+									</a> -->
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-11 col-xs-12 pull-right new-comment">									
+									<div class="post-separator" ng-repeat="comentario in respuesta.comentarios  | orderBy:'fecha' ">
+
+										<span class="comment" ng-bind="comentario.comentario"></span>
+										<span>&nbsp·&nbsp</span>
+
+										<span>
+											<a 	class="name" 
+												data-template="user/usuario/perfil/modal-perfil.tpl.html" 
+												data-container="body"
+												bs-modal="modal"							
+												ng-bind="comentario.usuario.nombre"></a>
+
+
+											<time class="time" am-time-ago="comentario.fecha"></time>
+											<span ng-if="comentario.usuario.id_usuario === usuario._id">&nbsp·&nbsp</span>
+											<button class="btn btn-link"
+													ng-if="comentario.usuario.id_usuario === usuario._id"
+													ng-click="eliminarComentario(respuesta, comentario)">
+													Eliminar
+											</button>
+										</span>
+									</div>									
+
+									<div class="comment-box">
+										<textarea 	class="form-control msd-elastic" 
+													ng-model="respuesta.nuevoComentario"
+													ng-show="respuesta.mostrarFormularioComentario"
+													placeholder="Escribe un comentario...">
+										</textarea>
+										<button class="btn btn-success btn-xs pull-right"
+												ng-click="enviarComentario(respuesta)"
+												ng-show="respuesta.mostrarFormularioComentario">
+											Comentar
+										</button>
+									</div>
+
+									<button class="btn btn-link"
+											ng-hide="mostrarNuevoComentario(respuesta.comentarios)"
+											ng-if="usuarioConectado"
+											ng-click="respuesta.mostrarFormularioComentario = !respuesta.mostrarFormularioComentario">
+										Añadir Comentario
+									</button>
+								</div>
+							</div>
+
+						</div> 
+						<!-- Fin Comentario/Respuesta -->
+					</div>
+				</div>			
+				<!-- Fin Respuesta del post -->			
+
+
+
+
+				<!-- Comentario del post -->
+				<!-- <div class="post-comment-base">
+					<div class="post-content"> -->
+						<!-- Profile information -->
+						<!-- <a class="name name-link">
+							<div class="post-img-profile" style="background-image: url(img/img-profile-test.png);"></div>
+							Eusebio Lillo Jara
+						</a>
+						<label class="time"><i class="fa fa-clock-o"></i>hace 2 horas</label>
+						<div class="row">
+							<div class="post-content-space"> -->
+								<!-- Fin Profile Information -->
+								<!-- <hr class="post-separator"> -->
+								<!-- Comentario/Respuesta -->
+								<!-- <a href="#" class="post-action-link">Elegir mejor Respuesta</a>
+								<p class="post-comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+							</div>
+							<div class="text-center post-votes">
+								<a class="up-vote"><i class="fa fa-thumbs-up"></i></a>
+								<label>12</label>
+								<a class="down-vote"><i class="fa fa-thumbs-down"></i></a>
+							</div>
+						</div>
+						<div class="var-inline clearfix">
+							<div class="pull-right text-center var-inline-block">
+								<a href="#" class="post-action-link" data-title="Denunciar" bs-tooltip>
+									<i class="fa fa-flag"></i>
+								</a>
+							</div>
+						</div> -->
+						<!-- Fin Comentario/Respuesta -->
+					<!-- </div>
+				</div> -->
+				<!-- Fin Comentario del post -->
+
+				<div class="post-comment-bottom clearfix" ng-show="usuarioConectado">
+					<div class="post-img-profile" style="background-image: url({{usuario.photo}});"></div>
+					<label class="name name-link">
+						{{usuario.nombre}}								
+					</label>
+					<form name="respuestaForm">
+						<textarea 	name="respuesta" 
+									class="form-control msd-elastic" 
+									ng-model="respuesta" 
+									ng-required="true"
+									placeholder="Escribe una respuesta...">
+						</textarea>
+					</form>
+					<div class="pull-right">
+						<button ng-click="responder()" 
+								ng-disabled="!esPosibleResponder()"
+								class="btn btn-success">
+								Responder
+						</button>
+					</div>
+					<!-- <div class="pull-left">
+						<button class="btn btn-link btn-info">
+							<i class="fa fa-info-circle"></i> Tips para respuestas
+						</button>
+					</div> -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

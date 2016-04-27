@@ -1,0 +1,342 @@
+<!-- Header -->
+<div ui-view="app-header"></div>
+<!-- End Header -->
+
+
+<div class="bg-white-body">
+	<div class="container">
+	 	<div class="content-post">
+	 		
+	 		<!-- Perfil normal -->
+	 		<div class="row" ng-hide="editando">
+				<div class="profile-header">
+					<div class="pull-right">
+						<!-- <button class="btn btn-success">Seguir <i class="fa fa-user-plus"></i></button>
+						<button class="btn btn-default">Dejar de Seguir <i class="fa fa-user-times"></i></button> -->
+						<button class="btn btn-edit" 				
+								ng-click="editar(true)"
+								ng-if="usuario._id === usuarioSesion.id">
+							<i class="fa fa-edit"></i>
+						</button>
+					</div>
+
+					<div 	ng-if="mostrarFoto" 
+							class="post-img-profile" 
+							style="background-image: url({{usuario.photo}});">
+					</div>
+					<div class="var-inline-block">
+						<h2 ng-bind="usuario.nombre"></h2>
+						<label>
+							<a ng-bind="usuario.institucion.nombre"></a> |
+							<a ng-bind="usuario.carrera.nombre"></a> | 							
+							<a ng-bind="usuario.anio_ingreso"></a>
+						</label>
+						<br>
+						<label><a ng-bind="usuario.ciudad.nombre"></a>,&nbsp<a ng-bind="usuario.pais.nombre"></a></label>
+					</div>
+					<p>{{ usuario.comentario }}</p> 
+				</div>
+			</div>
+
+			<!-- Perfil Editable -->
+			<div class="row" ng-show="editando">
+				<div class="profile-header">
+					<div class="pull-right">
+						<button class="btn btn-link btn-confirmation color wrong" 
+								type="button" 
+								ng-click="editar(false)">
+							<i class="fa fa-close"></i>
+						</button>
+
+						<button class="btn btn-link btn-confirmation color check" 
+								type="button" 
+								ng-click="guardar()">
+							<i class="fa fa-check"></i>
+						</button>
+					</div>
+
+					<div 	ng-if="mostrarFoto" 
+							class="post-img-profile" 
+							style="background-image: url({{usuario.photo}});">
+
+						<!-- <button class="btn btn-photo pull-right">
+							<i class="fa fa-camera"></i>
+						</button> -->
+					</div>
+
+					<div class="var-inline-block">
+						<input 	type="text" 
+								placeholder="Nombre Completo" 
+								class="editable-input form-control title-name" 
+								ng-model="usuario.nombre">
+
+						<!-- Información Academica -->
+						<input 	type="text"
+								placeholder="Institución"
+								class="editable-input var-inline-block"
+								ng-model="usuario.institucion"
+								ng-options="institucion as institucion.nombre for institucion in buscarInstituciones($viewValue)"
+								data-template="template/typeahead.tpl.html"
+					  			data-min-length="4"	
+					  			bs-typeahead/>
+
+						<span 	class="hide-mobile">&nbsp|&nbsp</span>
+
+						<input 	type="text"
+								placeholder="Carrera"
+								class="editable-input var-inline-block"
+								ng-model="usuario.carrera"
+								ng-options="carrera as carrera.nombre for carrera in buscarCarreras($viewValue)"
+								data-template="template/typeahead.tpl.html"
+					  			data-min-length="4"	
+					  			bs-typeahead/>
+					  	</input>		
+
+						<span class="hide-mobile">&nbsp|&nbsp</span>
+
+						<input 	type="text" 
+								placeholder="Año de Ingreso" 
+								class="editable-input var-inline-block"
+								ng-model="usuario.anio_ingreso"/>
+
+						<br>
+						<!-- Información Ciudad y País -->
+						<input 	type="text"
+								placeholder="Ciudad"
+								class="editable-input var-inline-block"
+								ng-model="usuario.ciudad"
+								ng-options="ciudad as ciudad.nombre for ciudad in buscarCiudades($viewValue)"
+								data-template="template/typeahead.tpl.html"
+					  			data-min-length="4"	
+					  			bs-typeahead/>
+
+						<span class="hide-mobile">,&nbsp</span>
+
+						<input 	type="text" 
+								placeholder="País" 
+								class="editable-input var-inline-block"
+								ng-model="usuario.pais"
+								ng-options="pais as pais.nombre for pais in paises"
+								data-template="template/typeahead.tpl.html"
+					  			bs-typeahead/>
+					</div>
+
+					<textarea 	class="editable-input form-control" 
+								rows="3" 
+								placeholder="Cuéntanos algo de ti, qué buscas en esta comunidad, qué te gusta, etc."
+								ng-model="usuario.comentario">								
+					</textarea>
+
+				</div>
+			</div>
+		</div>
+	</div>	
+</div>   
+
+
+<div class="container" ng-controller="listadoTodosController">	
+	<div class="content-post" ng-if="sinContenido">
+		<div class="row">
+			<!-- Mensaje de usuario sin posts -->
+			<h4 class="main-results">
+				<i class="fa fa-meh-o"></i>
+				<br>
+				<strong ng-bind="nombreUsuario"></strong> todavía no ha hecho preguntas.
+			</h4>
+		</div>
+	</div>	
+
+	<div class="row">
+		<div class="content-post" ui-view="app-list">			
+			<div 	class="col-xs-12"  
+					style="padding:0px;" 
+					infinite-scroll="buscarMasPublicaciones()" 
+					infinite-scroll-distance="3" 
+					ng-if="!sinContenido">
+
+				<div ng-repeat="publicacion in publicaciones">
+
+					<!-- Publicaciones tipo Pregunta -->
+					<div 	class="post post-question post-bar post-animation"
+							ng-if="publicacion.tipo === 'P'">
+
+						<div class="post-content" ng-click="irDetallePregunta(publicacion._id, publicacion.titulo_url);">
+							<!-- Profile information -->
+							<div class="post-img-profile" style="background-image: url({{publicacion.usuario.photo}});"></div>
+							<a 	class="name name-link name-profile" 
+								data-template="user/usuario/perfil/modal-perfil.tpl.html" 
+								data-container="body"
+								data-content="{{publicacion.usuario.nombre}}"
+								bs-modal="modal"
+								ng-click="$event.stopPropagation();"
+								ng-bind="publicacion.usuario.nombre">								
+							</a>
+
+							<label class="time"><i class="fa fa-clock-o"></i> </label>
+							<time class="time" am-time-ago="publicacion.fecha"></time>	
+							<hr class="post-separator">
+							
+							<!-- Texto Post -->
+							<a 	class="post-title" 
+								ng-click="$event.stopPropagation();"
+								ng-bind="publicacion.titulo"
+								ui-sref="detallePregunta({ idPregunta : publicacion._id, titulo : publicacion.titulo_url })"></a>
+
+							<!-- Tags Post -->			
+							<div class="post-tags var-inline">
+								<i ng-if="mostrarTags(publicacion)" class="fa fa-tags"></i>
+								<label ng-repeat="tag in publicacion.tags">
+									<a 	ui-sref="hashtag({ tag : tag.substring(1, tag.length) })" 
+										ng-click="$event.stopPropagation();" 
+										ng-bind="tag">
+									</a>
+								</label>
+								<label ng-if="mostrarInstitucion(publicacion.institucion)">
+									<a href="" ng-click="$event.stopPropagation();">
+										<i class="fa fa-institution"></i>
+										{{publicacion.institucion.nombre}}
+									</a>
+								</label>
+								<label ng-if="mostrarCarrera(publicacion.carrera)">
+									<a ng-click="$event.stopPropagation();">
+										<i class="fa fa-graduation-cap"></i>
+										{{publicacion.carrera.nombre}}
+									</a>
+								</label>				
+							</div>
+						</div>
+
+						<!-- Acciones Post -->
+						<div class="post-action clearfix" ng-click="irDetallePregunta(publicacion._id, publicacion.titulo_url);">
+							<div class="row">
+								<div class="col-xs-10">
+									<span class="post-action-link"><i class="fa fa-comments"></i>{{ publicacion.cantidad_respuestas }}</span>
+									<span class="post-action-link"><i class="fa fa-thumbs-up"></i>{{ publicacion.ranking }}</span>		
+									<span class="post-action-link answered" ng-if="publicacion.esta_respondida"><i class="fa fa-check"></i>Respondida</span>
+								</div>
+								<div class="col-xs-2 text-right">
+									<a 	ng-click="$event.stopPropagation(); confirmarEliminarPublicacion(publicacion);" 
+										ng-if="publicacion.usuario.id_usuario === usuarioSesion.id"
+										class="post-action-link">					
+										<i class="fa fa-refresh fa-spin" ng-show="publicacion.eliminando"></i>
+										<i class="fa fa-trash" ng-hide="publicacion.eliminando"></i>										
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- FIN Publicaciones tipo Pregunta -->
+
+					<!-- Publicaciones tipo Confesiones -->
+					<div 	class="post post-confession post-bar post-animation"
+							ng-if="mostrarPublicacionConfesiones(publicacion.tipo, publicacion.usuario.id_usuario, usuarioSesion.id)">
+
+						<div class="post-content" ng-click="irDetalleConfesion(publicacion._id);">
+							<!-- Profile information -->
+							<i class="fa fa-user-secret" style="font-size : 32px;"></i>
+							<label class="name name-profile" ng-if="!publicacion.usuario.nombre">An&oacute;nimo</label>	
+							<label class="name name-profile" ng-if="publicacion.usuario.nombre">{{publicacion.usuario.nombre}}</label>		
+
+							<label class="time"><i class="fa fa-clock-o"></i> </label>
+							<time class="time" am-time-ago="publicacion.fecha"></time>	
+
+							<!-- Puntuación en desktop -->
+							<!-- <div class="post-votes-top hidden-xs">
+								<a 	class="down-vote"
+									ng-class="{ 'down-vote-selected' : publicacion.usuarioReprueba }"
+									ng-click="evaluarPublicacion(false)">
+									<i class="fa fa-thumbs-down"></i>
+								</a>
+								<label>{{ publicacion.ranking }}</label>
+								<a 	class="up-vote"
+									ng-class="{ 'up-vote-selected' : publicacion.usuarioAprueba }"
+									ng-click="evaluarPublicacion(true)">
+									<i class="fa fa-thumbs-up"></i>
+								</a>
+							</div> -->
+
+							<!-- Contenido del Post -->
+							<div class="row">
+								<div class="post-content-space col-xs-12 col-sm-12">
+									<hr class="post-separator">
+									<p class="post-comment" ng-bind="extractoConfesion(publicacion.detalle)"></p>
+
+									<!-- Tags Post -->			
+									<div class="post-tags var-inline">
+										<i ng-if="mostrarTags(publicacion)" class="fa fa-tags"></i>
+
+										<label ng-repeat="tag in publicacion.tags">
+											<a 	ui-sref="hashtag({ tag : tag.substring(1, tag.length) })"  
+												ng-click="$event.stopPropagation();" 
+												ng-bind="tag">
+											</a>
+										</label>
+
+										<label ng-if="mostrarInstitucion(publicacion.institucion)">
+											<a href="" ng-click="$event.stopPropagation();">
+												<i class="fa fa-institution"></i>
+												{{publicacion.institucion.nombre}}
+											</a>
+										</label>
+										
+										<label ng-if="mostrarCarrera(publicacion.carrera)">
+											<a href="" ng-click="$event.stopPropagation();">
+												<i class="fa fa-graduation-cap"></i>
+												{{publicacion.carrera.nombre}}
+											</a>
+										</label>				
+									</div>
+								</div>
+								<!-- <div class="text-right col-xs-2 post-votes visible-xs">
+									<a 	class="up-vote"
+										ng-class="{ 'up-vote-selected' : publicacion.usuarioAprueba }"
+										ng-click="evaluarPublicacion(true)">
+										<i class="fa fa-thumbs-up"></i>
+									</a>
+
+									<label>{{ publicacion.ranking }}</label>
+
+									<a 	class="down-vote"
+										ng-class="{ 'down-vote-selected' : publicacion.usuarioReprueba }"
+										ng-click="evaluarPublicacion(false)">
+										<i class="fa fa-thumbs-down"></i>
+									</a>
+								</div> -->
+							</div>
+						</div>
+						<!-- Acciones Post -->
+						<div class="post-action clearfix" ng-click="irDetalleConfesion(publicacion._id);">
+							<div class="row">
+								<div class="col-xs-10">
+									<span class="post-action-link"><i class="fa fa-comments"></i>{{ publicacion.cantidad_comentarios }}</span>
+									<span class="post-action-link"><i class="fa fa-thumbs-up"></i>{{ publicacion.ranking }}</span>								
+								</div>
+								<div class="col-xs-2 text-right">
+									<a 	ng-click="$event.stopPropagation(); confirmarEliminarPublicacion(publicacion);" 
+										ng-if="publicacion.usuario.id_usuario === usuarioSesion.id"
+										class="post-action-link">					
+										<i class="fa fa-refresh fa-spin" ng-show="publicacion.eliminando"></i>
+										<i class="fa fa-trash" ng-hide="publicacion.eliminando"></i>										
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- FIN Publicaciones tipo Confesiones -->
+				</div>
+
+				<!-- Banner test -->
+				<!-- <div class="banner-test">
+					<h5 class="text-center">Publicidad test <a href="#">Link interesante de la publicidad</a></h5>
+				</div> -->	
+
+				<div class="post-loader text-center" ng-show="cargandoPublicaciones">
+					<span><i class="fa fa-circle-o-notch fa-spin"></i> Cargando más posts...</span>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+</div>

@@ -1,0 +1,53 @@
+<div class="modal modal-test module" tabindex="-1" role="dialog">
+	<div class="modal-dialog">
+		<div class="login-module">
+			<div class="modal-head">
+				<div class="pull-right">
+					<a class="modal-close gray" ng-click="$hide()"><i class="fa fa-close"></i></a>
+				</div>
+			</div>
+			
+			<div class="login-content">
+				<div class="text-center">				
+					<h3 class="login-title login-title-green">Iniciar Sesión</h3>
+				</div>
+			
+				<form class="login-input">	
+					<input type="text" class="form-control" placeholder="Correo Electrónico" autofocus></input>
+					<p class="error">No parece ser un correo correcto</p>
+					<input type="password" class="form-control" placeholder="Contraseña"></input>
+					<p class="error">Contraseña incorrecta</p>
+				</form>
+
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" value="Remember Password"></input>
+						No cerrar sesión
+					</label>
+				</div>
+
+				<a ui-sref="registro" class="btn btn-success btn-lg col-xs-12" style="margin-bottom: 10px;">Ingresar</a>
+
+				<div class="text-center">
+					<a href="#" id="login-forgot">¿Has olvidado tu contraseña?</a>
+				</div>
+
+				<hr>
+
+				<div class="text-center">
+					<p id="login-dialog">¿No tienes cuenta?</p>
+				</div>
+
+				<div class="text-center">
+					<a href="#" class="login-title login-title-blue">Crear Cuenta</a>
+				</div>
+			</div>
+
+			<div class="fb-bg">	
+				<a href="http://api.universitame.com:8181/auth/facebook" class="">
+					<i class="fa fa-facebook"></i> Ingresar con Facebook
+				</a>
+			</div>
+		</div>
+	</div>
+</div>

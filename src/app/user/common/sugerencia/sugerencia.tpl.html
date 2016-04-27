@@ -1,0 +1,45 @@
+<div class="modal" tabindex="-1" role="dialog" ng-controller="nuevaSugerenciaController">
+	<div class="modal-dialog">
+		<div class="modal-content">						
+			<div class="modal-head modal-base">
+				<h2 class="modal-title var-inline-block"><i class="fa fa-heart"></i> ¡Ayúdanos a mejorar!</h2>
+				<div class="pull-right">
+					<a class="modal-close white" ng-click="$hide()"><i class="fa fa-close"></i></a>
+				</div>
+			</div>
+			<div class="modal-body">				
+				<div class="modal-textarea" ng-hide="mostrarMensaje">
+					<form name="nuevaSugerenciaForm">
+						<textarea 	class="form-control modal-input-width" 
+									tabindex="1"
+									rows="5" 
+									placeholder="¡Hola! Cuéntanos que te gustó o qué mejorarías de tu experiencia en Uníversitame."
+									name="detalle"
+									ng-model="sugerencia.detalle"
+									ng-required="true"
+									ng-autofocus="{{open}}">
+						</textarea>
+					</form>
+
+					<div class="modal-textarea-bottom clearfix">
+						<p>Cada día ponemos lo mejor de nosotros para mejorar esta plataforma y construir contigo un mejor Universítame. ¡Gracias por tu tiempo!</p>
+
+						<div class="pull-right">
+							<button tabindex="2"									
+									ng-disabled="!esPosibleIngresar()"
+									ng-click="ingresar()" 
+									class="btn btn-success btn-sm">
+								Enviar
+							</button>
+						</div>						
+					</div>
+				</div>
+
+				<h2 class="text-center" ng-show="mostrarMensaje">
+					¡Gracias por tus comentarios! <br>
+					<small>Revisaremos tu feedback y trataremos de dar una solución lo más pronto posible <i class="fa fa-smile-o"></i></small>
+				</h2>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,171 @@
+.app-header {
+	background:	$black;
+	padding: 5px 0;
+	line-height: 1.5em;
+	@include box-shadow(0px 1px 2px 0px rgba(0,0,0,0.3));	
+	.btn {
+		margin: 0 3px;
+		border-radius: 20px;
+		@include gridle_state(mobile, tablet){
+			height: 34px;
+			.fa {
+				position: relative;
+				right: 2px;
+			}
+		}
+	}
+	.btn-link {
+		color: white;
+	}
+	.visible-xs {
+		@include gridle_state(mobile tablet) {
+			display: inline-block !important;
+		}
+	}
+	.search {
+		border: none;
+		background: rgba(255,255,255,0.8);
+		border-radius: 30px;
+		padding: 5px 10px;
+		height: 33px;
+		position: relative;
+		top: 2px;
+		color: $gray-base;
+		@include transition(0.25s);
+		@include gridle_hide(tablet);
+		&:hover, &:focus {
+			background: white;
+			color: $gray-base
+		}
+	}
+	.notification {
+		position: relative;
+		top: 2px;
+	}
+	.btn-profile {
+		position: relative;
+		top: 6px;
+	}
+	.pull-right {
+		position: relative;
+		top: 4px;
+	}
+	.separator {
+		@include lato(400, 16px, white);
+		margin: 0 5px;
+	}	
+}
+
+.notification {
+	margin: 0 10px;
+	border-radius: $border-radius;
+	text-decoration: none;
+	i {
+		color: rgba(255,255,255,0.8);
+		font-size: 18px;
+		@include transition(0.25s);
+	}
+	.badge {
+		background: $special-pink;
+		font-size: 11px;
+		padding: 3px 5px;
+		position: relative;
+		top: -8px;
+		left: -8px;
+	}
+	&:hover {
+		text-decoration: none;
+		i {
+			color: white;
+			
+		}
+	}
+	&:focus {
+		text-decoration: none;
+	}
+}
+
+.topbar-profile {
+	height: 40px;
+	width: 40px;
+	border-radius: 30px;
+	overflow: hidden;
+	img {
+		height: auto;
+		max-width: 100%;
+	}
+}
+
+.btn-menu {
+	top: 4px;
+	position: relative;
+	margin-right: 20px;
+	color: rgba(255,255,255,0.8) !important;
+	@include transition(0.3s);
+	&:hover {
+		color: white !important;
+	}
+	i {
+		font-size: 20px;
+		@include gridle_state(mobile tablet) {
+			color: white;
+		}
+	}
+}
+
+.btn-profile {
+	padding-left: 0;
+	cursor: pointer !important;
+	margin: 0 10px 0 0;
+	&:hover {
+		border: none !important;
+		text-decoration: none !important;
+		i {
+			background: white;
+		}
+		b {
+			text-decoration: underline;
+		}
+	}
+	i {
+		color: $black;
+		background: rgba(255,255,255,0.8);
+		font-size: 20px;
+		padding: 9px;
+		height: 34px;
+		width: 34px;
+		position: relative;
+		top: 0px;
+		border-radius: 30px;
+		@include transition(0.25s);
+	}
+	b {
+		@include lato(400, 14px, white);
+		margin-right: 2px;
+	}
+}
+
+.full-logo {
+	@include gridle_hide(mobile tablet);
+	@include gridle_show(desktop);
+	&:hover, &:focus {
+		text-decoration: none;
+	}
+}
+
+.single-logo {
+	@include gridle_hide(desktop);
+	@include gridle_show(mobile tablet);
+	margin-left: 10px;
+}
+
+.btn-search-bar {
+	border: 1px solid white;
+	background: rgba(255,255,255,0.3);
+	color: white;
+	height: 34px;
+	&:hover, &:focus {
+		background: white;
+		color: $gray;
+	}
+}

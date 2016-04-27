@@ -1,0 +1,140 @@
+<!-- Barra superior de la aplicación -->
+<div class="app-header navbar-fixed-top">
+	<div class="container">
+		<div class="row">		
+			<div class="pull-left">
+
+				<a ui-sref="home.preguntas({idi : undefined, ndi : undefined, idc : undefined, ndc : undefined, text : undefined })" class="full-logo">
+					<img src="img/iso-logo.svg" class="img-responsive buzz var-inline-block" alt="Responsive image" style="margin-right: 5px" >
+					<img src="img/logo-side.svg" class="img-responsive var-inline-block" alt="Responsive image">
+					<label class="beta-text">BETA</label>
+				</a>
+
+				<a ui-sref="home.preguntas({idi : undefined, ndi : undefined, idc : undefined, ndc : undefined, text : undefined })" class="single-logo">
+					<img src="img/iso-logo.svg" alt="Universítame">
+					<label class="beta-text">BETA</label>
+				</a>
+			</div>
+
+			<nav class="pull-right">
+
+				<label 	class="separator hidden-xs" 
+						ng-if="usuarioConectado">
+						Haz una
+				</label>
+				
+				<button class="btn btn-primary hide-mobile" 
+						ng-click="showNuevaPregunta()"
+						ng-if="usuarioConectado">
+					<i class="fa fa-question"></i> Pregunta
+				</button>
+
+				<label 	class="separator hidden-xs"
+						ng-if="usuarioConectado">o
+				</label>
+
+				<button class="btn btn-warning hide-mobile" 
+						ng-click="showNuevaConfesion()"
+						ng-if="usuarioConectado">
+					<i class="fa fa-bomb"></i> Confesión
+				</button>
+				
+				<button class="btn btn-link visible-xs" 
+						data-animation="am-fade-and-scale"  
+						data-template="user/home/filtro/modal-search.tpl.html" 
+						data-container="body"
+						bs-modal="modal">
+						<i class="fa fa-search"></i>
+				</button>
+
+			    <input 	class="hidden-xs search" 
+			    		type="text" 
+			    		placeholder="Buscar"
+			    		ng-model="textoBusqueda"
+			    		ng-enter="buscarPublicaciones()">
+				</input>
+
+				<a 	class="notification hide-mobile" 
+					ng-if="usuarioConectado"
+					data-template="user/common/header/notificacion.tpl.html" 
+					data-animation=""
+					data-container="body"
+					data-auto-close="1"
+					data-placement="bottom-right"
+					bs-popover> 
+					<i class="fa fa-inbox" aria-hidden="true"></i> 
+					<span 	class="badge" 
+							ng-bind="cantidadNotificaciones"
+							ng-hide="cantidadNotificaciones === 0">
+					</span>
+				</a>
+				<a 	class="btn-link btn-menu"
+					ng-if="usuarioConectado" 
+					data-template="user/common/menu/menu.tpl.html" 
+					data-placement="right" 
+					data-animation="am-slide-right" 
+					bs-aside="aside" 
+					data-container="body">
+					<b ng-bind="nombre"></b>				
+					<i class="fa fa-bars"></i>
+				</a>
+
+				<button class="btn btn-success"
+					ng-if="!usuarioConectado"
+					ui-sref="login">
+					Iniciar sesión
+				</button>
+			</nav>		
+		</div>
+	</div>
+</div>
+<!-- FIN - Barra superior de la aplicación -->
+
+<!-- Bottom bar para Desktop -->
+<div 	class="contact-box hide-mobile"
+		ng-if="usuarioConectado" 
+		data-animation="am-fade-and-scale"  
+		data-template="user/common/sugerencia/sugerencia.tpl.html" 
+		data-container="body"
+		bs-modal="modal">
+	<a><i class="fa fa-heart"></i> ¡Ayúdanos a mejorar!</a>
+</div>
+<!-- FIN - Bottom bar para Desktop -->
+
+<!-- Bottom Bar para Móviles -->
+<div class="bottom-bar" ng-if="usuarioConectado">
+
+	<a 	class="btn btn-link" 
+		data-animation="am-fade-and-scale" 
+		data-template="user/common/sugerencia/sugerencia.tpl.html" 
+		data-container="body" bs-modal="modal">
+		<i class="fa fa-heart"></i>
+	</a>
+
+	<div 	class="btn-group" 			
+			role="group" 
+			aria-label="...">
+		<button class="btn btn-primary"
+				ng-click="showNuevaPregunta()">
+			<i class="fa fa-question"></i>
+		</button>
+		<button class="btn btn-warning"
+				ng-click="showNuevaConfesion()">
+			<i class="fa fa-bomb"></i>
+		</button>
+	</div>
+	<a 	class="btn btn-link"
+		data-template="user/common/header/notificacion.tpl.html" 
+		data-animation=""
+		data-auto-close="1" 
+		data-placement="top"
+		bs-popover> 
+		<i class="fa fa-inbox" aria-hidden="true"></i> 
+		<span 	class="badge" 
+				ng-bind="cantidadNotificaciones"
+				ng-hide="cantidadNotificaciones === 0">
+		</span>
+	</a>
+</div>
+<!-- FIN Bottom Bar para Móviles -->
+

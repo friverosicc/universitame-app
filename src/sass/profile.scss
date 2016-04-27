@@ -1,0 +1,87 @@
+// Profile
+
+.profile-header {
+	padding: 10px 0;
+	.post-img-profile {
+		height: 90px;
+		width: 90px;
+		border-radius: 45px;
+		display: inline-block;
+		margin-right: 10px;
+	}
+	.btn-link {
+		margin-bottom: 5px;
+	}
+	h2 {
+		margin: 0;
+		font-size: 18px;
+	}
+	.title-name {
+		@include lato(700, 18px, $black);
+	}
+	label {
+		margin: 0;
+		@include lato(400, 16px, $gray);
+		a {
+			cursor: pointer;
+			color: $gray;
+			&:hover {
+				color: $gray;
+				@include dotted;
+			}
+		}
+	}
+	p {
+		margin: 10px 0 0 0;
+		@include lato(400, 14px, $gray);
+	}
+}
+
+.btn-edit {
+	border-radius: 50%;
+	height: 40px;
+	width: 40px;
+	color: $gray;
+	text-align: center;
+	padding: 0;
+	background: white;
+	@include transition(0.25s);
+	&:hover {
+		color: $black;
+		@include box-shadow(0px 2px 4px 0px rgba(0,0,0,0.6));	
+	}
+}
+
+.btn-photo {
+	position: relative;
+	top: -5px;
+	right: -5px;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	text-align: center;
+	padding: 0;
+	border: 1px solid $gray;
+	color: $gray;
+	background-color: white;
+	@include transition(0.3s);
+	&:hover {
+		background-color: $gray;
+		color: white;
+	}
+}
+
+.editable-input {
+	border: 1px dotted $light-gray;
+	border-radius: $border-radius;
+	padding: 4px;
+	margin-bottom: 5px !important;
+	cursor: pointer;
+	@include transition(0.3s);
+	@include gridle_state(mobile) {
+		width: 100%;
+	}
+	&:hover {
+		border-color: $black;
+	}
+}

@@ -1,0 +1,68 @@
+<div class="modal" tabindex="-1" role="dialog" ng-controller="detalleSugerenciaController">
+	<div class="modal-dialog">
+		<div class="modal-content">						
+			<div class="modal-head modal-base">
+				<h2 class="modal-title var-inline-block" ng-hide="sugerencia.respondida">Responder</h2>
+				<h2 class="modal-title var-inline-block" ng-show="sugerencia.respondida">Sugerencia/Respuesta</h2>
+
+				<div class="pull-right">
+					<a class="modal-close white" ng-click="$hide()"><i class="fa fa-close"></i></a>
+				</div>
+			</div>
+			<div class="modal-body modal-sugerencia">
+				<div class="post-img-profile" style="background-image: url({{sugerencia.usuario.photo}});"></div>
+				<a class="name name-link name-profile" ng-bind="sugerencia.usuario.nombre"></a>
+				<label class="time"><i class="fa fa-clock-o"></i> </label>
+				<time class="time" am-time-ago="sugerencia.fecha"></time>
+
+				<div>
+					<p ng-bind="sugerencia.detalle"></p>
+				</div>
+				
+				<hr class="post-separator">
+				
+				<!-- Usuario administrador si es que la sugerencia no ha sido respondida -->
+				<div class="post-img-profile" ng-hide="sugerencia.respondida" style="background-image: url({{admin.photo}});"></div>
+				<a class="name name-link name-profile" ng-hide="sugerencia.respondida" ng-bind="admin.nombre"></a>
+
+				<!-- Usuario que respondió la sugerencia, si esta se encuentra respondida -->
+				<div class="post-img-profile" ng-show="sugerencia.respondida" style="background-image: url({{sugerencia.respuesta.usuario.photo}});"></div>
+				<a class="name name-link name-profile" ng-show="sugerencia.respondida" ng-bind="sugerencia.respuesta.usuario.nombre"></a>
+
+				<label class="time" ng-show="sugerencia.respondida">
+					<i class="fa fa-clock-o"></i> 
+				</label>
+				<time class="time" ng-show="sugerencia.respondida" am-time-ago="sugerencia.respuesta.fecha"></time>
+
+				<div ng-show="sugerencia.respondida">
+					<p ng-bind="sugerencia.respuesta.detalle"></p>
+				</div>				
+				<div class="modal-textarea" ng-hide="sugerencia.respondida">
+
+					<form name="respuestaSugerenciaForm">
+
+						<textarea 	class="form-control modal-input-width" 
+									tabindex="1"
+									rows="3" 
+									placeholder="Escribe una respuesta..."
+									name="respuesta"
+									ng-required="true"
+									ng-model="respuesta">
+						</textarea>
+					</form>
+
+					<div class="modal-textarea-bottom clearfix">
+						<div class="pull-right">
+							<button class="btn btn-success btn-sm"
+									tabindex="2"									
+									ng-disabled="!esPosibleIngresar()"
+									ng-click="responder()">
+								Responder
+							</button>
+						</div>						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

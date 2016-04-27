@@ -1,0 +1,80 @@
+.aside {
+	background: $black !important;
+	width: 300px;
+	// border-top: 5px solid $blue-base;
+	h4 {
+		@include open-sans(600, 16px, white);
+	}
+}
+
+.modal-close {
+	color: $gray;
+	cursor: pointer;
+	@include transition(0.25s);
+	&:hover {
+		color: white;
+	}
+	&.white {
+		color: rgba(255, 255, 255, 0.75);
+		&:hover {
+			color: white;
+		}
+	}
+	&.gray:hover{
+		color: $black;
+	}
+}
+
+.aside-img-profile {
+	width: 60px;
+	height: 60px;
+	background: no-repeat center center;
+	position: relative;
+	background-size: cover;
+	display: block;
+	margin: 0 auto 20px auto;
+	border-radius: 40px;
+}
+
+.aside-links {
+	a {
+		@include lato(400, 16px, $light-gray);
+		margin: 20px 0;
+		display: block;
+		@include transition(0.3s);
+		.fa-heart {
+			color: $light-gray;
+			@include transition(0.3s);
+		}
+		&:hover {
+			color: white;
+			text-decoration: none;
+			.fa-heart {
+				color: $special-pink;
+				@include transition(0.3s);
+			}
+		}
+	}
+	i {
+		margin-right: 10px;
+	}
+	.badge {
+		margin: 0 5px;
+		background: $special-pink;
+	}
+}
+
+.aside-footer {
+	position: absolute;
+	bottom: 0;
+	border: none !important;
+	width: 100%;
+	padding: 10px 0 10px 20px !important;
+	@include gridle_state(mobile){
+		position: relative;
+		margin-top: -15px !important;
+	}
+	a {
+		color: $gray;
+	}
+}

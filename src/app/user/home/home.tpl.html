@@ -1,0 +1,91 @@
+<!-- Header -->
+<div ui-view="app-header"></div>
+<!-- End Header -->
+
+<div class="bg-filters hidden-xs">
+	<div class="content-post clearfix">
+		<div class="text-center">
+			<a ng-click="mostrarFiltro = !mostrarFiltro">¿Quieres buscar algo más específico?</a>
+		</div>
+
+		<form class="search-bar" ng-show="mostrarFiltro">
+
+			<div class="form-group col-xs-4" style="padding:0px;">
+				<div class="input-group">
+				  <span class="input-group-addon" ><i class="fa fa-institution"></i></span>				  
+				  	<input 	type="text" 
+				  			class="form-control form-first" 
+				  			placeholder="Establecimiento" 
+				  			aria-describedby="establecimiento"
+				  			ng-model="institucion"
+				  			ng-options="institucion as institucion.nombre for institucion  in buscarInstituciones($viewValue)"
+				  			template="template/typeahead.tpl.html"
+				  			data-min-length="2"
+				  			bs-typeahead>
+				</div>
+			</div>
+			<div class="form-group col-xs-4" style="padding:0px;">
+				<div class="input-group">
+				  <span class="input-group-addon form-center"><i class="fa fa-graduation-cap"></i></span>				  
+				  	<input 	type="text" 
+				  			class="form-control form-center" 
+				  			placeholder="Carrera" 
+				  			aria-describedby="carrera"
+				  			ng-model="carrera"
+				  			ng-options="carrera as carrera.nombre for carrera in buscarCarreras($viewValue)"
+				  			template="template/typeahead.tpl.html"
+				  			data-min-length="2"
+				  			bs-typeahead>
+				</div>
+			</div>
+			<div class="col-xs-4" style="padding:0px;">
+				<button style="width: 100%" class="btn btn-search-bar" ng-click="buscarPublicaciones(institucion, carrera, text)">
+					<i class="fa fa-search"></i>
+				</button>
+			</div>
+
+		</form>
+		
+	</div>
+</div>
+ 
+ <div class="bg-white-body">
+ 	<div class="container">
+		<div class="row" style="margin-top: 10px;">
+			<div class="content-post post-section">
+
+				<div 	ui-sref="home.preguntas({idi : institucion._id, ndi : institucion.nombre, idc : carrera._id, ndc : carrera.nombre, text : text })" 
+						class="col-xs-4 text-center menu question" 
+						ui-sref-active="question-active">
+					<a class="item">
+						<i class="fa fa-question"></i> Preguntas
+					</a>
+				</div>
+
+				<div 	ui-sref="home.todos({idi : institucion._id, ndi : institucion.nombre, idc : carrera._id, ndc : carrera.nombre, text : text})" 
+						class="col-xs-4 text-center menu all" 
+						ui-sref-active="all-active">
+					<a class="item">
+						<i class="fa fa-home"></i> Todo
+					</a>
+				</div>
+
+				<div 	ui-sref="home.confesiones({idi : institucion._id, ndi : institucion.nombre, idc : carrera._id, ndc : carrera.nombre, text : text })" 
+						class="col-xs-4 text-center menu confession" 
+						ui-sref-active="confession-active">
+					<a class="item">
+						<i class="fa fa-bomb"></i> Confesiones
+					</a>
+				</div>
+
+			</div>
+		</div>
+	</div>	
+</div>  
+
+<div class="container">
+	<div class="row">
+		<div class="content-post" ui-view="app-list">			
+		</div>
+	</div>
+</div>

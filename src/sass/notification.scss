@@ -1,0 +1,70 @@
+// Notificaciones
+
+.notif-content {
+	padding: 0;
+}
+
+.notif-individual {
+	padding: 10px;
+	border-bottom: 1px solid $light-gray;
+	@include transition(0.25s);
+	&:hover {
+		background: lighten($light-gray, 23%);
+	}
+	&:last-child {
+		border-bottom: none;
+	}
+	&.new {
+		background: $bg-light-gray;
+	}
+	.name {
+		a {
+			color: $gray;
+		}
+	}
+	.identifier {
+		height: 14px;
+		width: 14px;
+		border-radius: 10px;
+		background: red;
+		display: inline-block;
+		margin-right: 5px;
+		float: left;
+		position: relative;
+		top: 3px;
+		&.question {
+			background: $blue-base;
+		}
+		&.confession {
+			background: $purple-base;
+		}
+	}
+	.btn-link {
+		padding: 0;
+		color: $gray;
+	}
+}
+
+.popover-content {
+	max-height: 350px;
+	overflow-y: scroll;
+}
+
+.popover-title {
+	background: white;
+	border-bottom: 1px solid $light-gray;
+	@include lato(700, 16px, $black);
+	padding: 10px;
+}
+
+.popover {
+	.text-center {
+		border-top: 1px solid $light-gray;
+		.btn-link {
+			color: $green-base;
+			&:hover {
+				color: $green-base;
+			}
+		}
+	}
+}

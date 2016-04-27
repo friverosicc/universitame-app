@@ -1,0 +1,32 @@
+<div class="modal" tabindex="-1" role="dialog" ng-controller="modalPerfilController">
+	<div class="modal-dialog modal-module-profile">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="pull-right">
+					<a class="modal-close gray" ng-click="$hide()"><i class="fa fa-close"></i></a>
+				</div>
+				<div class="text-center">
+					<div class="modal-img-profile" style="background-image: url({{usuario.photo}});"></div>
+				</div>
+			</div>
+			<div class="modal-data-bg">
+				<div class="modal-body clearfix">
+					<div class="text-center">
+						<h5><a ui-sref="perfil({ id : usuario._id })" ng-bind="usuario.nombre"></a></h5>
+						<a ng-show="usuario.carrera" ng-bind="usuario.carrera.nombre"></a><br>
+						<a ng-show="usuario.institucion" ng-bind="usuario.institucion.nombre"></a><br>
+						<a ng-show="usuario.anios" ng-bind="usuario.anios"></a>
+						<label>
+							<a ng-show="usuario.ciudad" ng-bind="usuario.ciudad.nombre"></a>
+							,&nbsp
+							<a ng-show="usuario.pais" ng-bind="usuario.pais.nombre"></a>
+						</label>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="modal-follow-bg text-center">
+				<a href="#" class="btn btn-link"><i class="fa fa-user-plus"></i> Seguir</a>
+			</div> -->
+		</div>
+	</div>
+</div>

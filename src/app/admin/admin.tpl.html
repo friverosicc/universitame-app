@@ -1,0 +1,53 @@
+<!-- Header -->
+<div ui-view="app-header"></div>
+<!-- End Header -->
+
+<div class="container admin">
+	<div class="row">
+		<!-- Menu Admin -->
+		<div class="fixed-menu">
+			<div class="post">
+				<div 	class="module"
+						ui-sref="admin.dashboard"
+						ui-sref-active="active">
+					<i class="fa fa-gamepad fa-fw"></i>
+					<a> 
+						Dashboard
+					</a>
+					<label class="badge pull-right">3</label>
+				</div>
+
+				<div 	class="module"
+						ui-sref-active="active"
+						ui-sref="admin.sugerencias">
+					<i class="fa fa-heart fa-fw"></i>
+					<a> 
+						Ayúdanos a mejorar
+					</a>
+					<label 	class="badge pull-right" 
+							ng-bind="cantidadSugerencias"
+							ng-show="cantidadSugerencias > 0"></label>
+				</div>
+
+				<div 	class="module"
+						ui-sref-active="active"
+						ui-sref="admin.usuarios">
+					<i class="fa fa-users fa-fw"></i>
+					<a> 
+						Usuarios
+					</a>
+					<label class="badge pull-right">3</label>
+				</div>
+
+				<!-- <div 	class="module"
+						ui-sref-active="active">
+					<i class="fa fa-coffee fa-fw"></i>
+					<a href="#"> Reuniones</a>
+					<label class="badge pull-right">13</label>
+				</div> -->
+			</div>
+		</div>
+
+		<div class="fixed-content" ui-view="app-list">			
+		</div>
+</div>

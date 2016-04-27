@@ -1,0 +1,67 @@
+<div 	class="modal" 
+		tabindex="-1" 
+		role="dialog" 
+		ng-controller="nuevaConfesionController">
+
+	<div class="modal-dialog">
+		<div class="modal-content">		
+				<div class="modal-head modal-confession">
+					<h2 class="modal-title var-inline-block"><i class="fa fa-bomb"></i> Haz una confesión</h2>
+					<div class="pull-right">
+						<a class="modal-close white" ng-click="$hide()"><i class="fa fa-close"></i></a>
+					</div>
+				</div>
+				
+			<div class="modal-body">	
+				<div class="modal-data-post modal-confession-dialog">
+					<div class="var-inline-block">
+						<i class="fa fa-user-secret"></i>
+					</div>
+					<div class="var-inline-block">
+						<label class="modal-data name"><strong>Estás incóginto.</strong> Tus datos personales no se publican cuando confiesas algo ;)</label>
+					</div>
+				</div>
+
+				<form name="nuevaConfesionForm">					
+				<div class="col-xs-12 input-nopad">
+					<input 	type="text" 
+							class="form-control modal-input-width modal-input" 
+							name="apodo"							
+							placeholder="¿Quieres usar un apodo? (opcional)"
+							tabindex="1"										
+							ng-model="publicacion.usuario.nombre"
+							ng-autofocus="{{open}}">
+					</input>
+				</div>
+
+				<div class="modal-textarea">
+					<textarea 	class="form-control modal-input-width" 
+								rows="5" 
+								tabindex="2"
+								id="detalle"
+								placeholder="Cuéntanos esa historia con todos esos detalles sabrosos :P"
+								ng-model="publicacion.detalle"
+								ng-required="true">
+					</textarea>
+
+					<div class="modal-textarea-bottom clearfix">
+						<!-- <label class="pull-left modal-data name">
+							<input type="checkbox">
+							&nbsp Pedir contraseña para ver notificaciones
+						</label> -->
+						<div class="pull-right">
+							<button class="btn btn-warning btn-sm"
+									tabindex="3"
+									ng-click="publicar()"
+									ng-disabled="!sePuedePublicar()">
+									Publicar
+							</button>
+						</div>
+						
+					</div>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

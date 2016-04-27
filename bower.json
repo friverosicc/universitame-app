@@ -1,0 +1,50 @@
+{
+  "name": "universitame-app",
+  "version": "0.0.0",
+  "authors": [
+    "Francisco Riveros <francisco@universitame.com>",
+    "Camilo Muñoz <camilo@universitame.com>"
+  ],
+  "description": "Plataforma web en donde podrán compartir universitarios y futuros universitarios",
+  "keywords": [
+    "Universidad",
+    "Red",
+    "Social",
+    "Comunidad"
+  ],
+  "license": "MIT",
+  "homepage": "http://universitame.com",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-strap": "~2.1.6",
+    "fontawesome": "~4.3.0",
+    "angular-ui-router": "~0.2.13",
+    "gridle": "~1.3.35",
+    "angular-animate": "~1.3.9",
+    "ngstorage": "~0.3.0",
+    "angular-ui-select": "~0.9.6",
+    "angular-sanitize": "~1.3.11",
+    "angular-motion": "~0.3.4",
+    "bootstrap-sass": "~3.3.2",
+    "bootstrap-additions": "~0.2.3",
+    "underscore": "~1.7.0",
+    "angular-moment": "~0.9.0",
+    "angular-elastic": "~2.4.2",
+    "animate.css": "~3.2.1",
+    "angular-bootstrap": "~0.12.1",
+    "ngInfiniteScroll": "~1.2.0",
+    "angular-timer": "~1.3.1",
+    "fastclick": "~1.0.6"
+  },
+  "resolutions": {
+    "angular": "1.3.15"
+  }
+}

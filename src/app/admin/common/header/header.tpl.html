@@ -1,0 +1,35 @@
+<!-- Barra superior de la aplicación -->
+<div class="app-header navbar-fixed-top">
+	<div class="container">
+		<div class="row">		
+			<div class="pull-left">
+
+				<a ui-sref="home.todos({idi : undefined, ndi : undefined, idc : undefined, ndc : undefined, text : undefined })" class="full-logo">
+					<img src="img/iso-logo.svg" class="img-responsive buzz var-inline-block" alt="Responsive image" style="margin-right: 5px" >
+					<img src="img/logo-side.svg" class="img-responsive var-inline-block" alt="Responsive image">
+					<label class="title-logo">Admin</label>
+				</a>
+
+				<a ui-sref="home.todos({idi : undefined, ndi : undefined, idc : undefined, ndc : undefined, text : undefined })" class="single-logo">
+					<img src="img/iso-logo.svg" alt="Universítame">
+					<label class="title-logo">Admin</label>
+				</a>
+			</div>
+
+			<nav class="pull-right" style="position: relative; top: 8px;">				
+				<label class="profile-name" ng-bind="admin.nombre"></label>
+				<a 	class="btn-link btn-menu" 
+					data-template="user/common/menu/menu.tpl.html" 
+					data-placement="right" 
+					data-animation="am-slide-right" 
+					bs-aside="aside" 
+					data-container="body">
+					<b ng-bind="nombre"></b>				
+					<i class="fa fa-bars"></i>
+				</a>
+			</nav>		
+		</div>
+	</div>
+</div>
+<!-- FIN - Barra superior de la aplicación -->
+

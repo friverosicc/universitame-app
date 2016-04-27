@@ -1,0 +1,91 @@
+.login-module {
+	margin: 15px auto 30px auto;
+	display: block;
+	max-width: 360px;
+	width: 95%;
+	background: white;
+	overflow: hidden;
+	@include box-shadow(0px 2px 4px 0px rgba(0,0,0,0.4));
+	border-radius: $border-radius;
+	@include gridle_state(mobile) {
+		margin-top: 10px;
+	}
+}
+
+.btn-forgot {
+	color: $gray;
+	padding: 0;
+	margin-bottom: 10px;
+	@include transition(0.3s);
+	&:hover {
+		color: $black;
+	}
+}
+
+.login-content {
+	padding: 20px 10px 15px 10px;
+}
+
+.fb-bg {
+	background: #5071AA;
+	padding: 12px;
+	text-align: center;
+	@include transition(0.3s);
+	cursor: pointer;
+	a {
+		@include lato(400, 16px, white);
+		text-decoration: none;
+		i {
+			margin-right: 10px;
+		}
+	}
+	&:hover, &:focus {
+		background: darken(#5071AA, 10%);
+	}
+	&.search-bg {
+		background: $green-base;
+		&:hover, &:focus {
+			background: darken($green-base, 10%);
+		}
+	}	
+}
+
+.error {
+	@include open-sans(400, 13px, $special-pink);
+	text-align: left;
+	margin: 2px 0 10px 0;
+}
+
+.login-title {
+	margin: 10px 0 20px 0;
+	@include lato (700, 22px, $gray);
+	&.login-title-green {
+		color: $green-base;
+	}
+	&.login-title-blue {
+		color: $blue-base;
+	}
+
+}
+
+#login-forgot {
+	@include lato(400, 16px, $gray);
+}
+
+#login-dialog {
+	@include lato(400, 14px, $black);
+	margin: 0;
+}
+
+.login-input {
+	input {
+		margin-bottom: 5px;
+		&:last-child {
+			margin-bottom: 20px;
+		}
+	}
+}
+
+.checkbox {
+	pointer: cursor;
+}

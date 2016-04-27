@@ -1,0 +1,118 @@
+<!-- Resultados -->
+<h4 class="main-results dialogue" ng-if="camposFiltro" ng-bind-html="camposFiltro"></h4>
+<!-- Fin Resultados -->
+
+
+<div class="col-xs-12" >		
+	<!-- Nav Posts -->
+	<div class="nav-special-filters">
+		<!-- <div class="var-inline-block">
+			<h2 class="hide-mobile">Recientes</h2>
+		</div> -->
+		<div class="nav-filters">
+			<a ui-sref-active="active" ui-sref="home.preguntas({ ordenar : '', filtrar : ''})">Recientes</a>
+			<a ui-sref-active="active" ui-sref="home.preguntas({ ordenar : 'me', filtrar : '' })">Mejor Evaluadas</a>
+			<a ui-sref-active="active" ui-sref="home.preguntas({ filtrar : 'sr' })">Sin Responder</a>
+		</div>
+	</div>
+	<!-- Fin Nav Posts -->		
+</div>
+
+<!-- No content -->
+<div class="col-xs-12" ng-if="sinContenido">
+	<h4 class="main-results">
+		Ouch! No hemos podido encontrar lo que buscas <i class="fa fa-frown-o"></i>
+	</h4>
+</div>
+<!-- End No content -->
+
+<div 	class="col-xs-12"  
+		style="padding:0px;" 
+		infinite-scroll="buscarMasPublicaciones()" 
+		infinite-scroll-distance="3" 
+		ng-if="!sinContenido">
+
+	<div ng-repeat="publicacion in publicaciones">
+
+		<!-- Publicaciones tipo Pregunta -->
+		<div 	class="post post-question post-bar post-animation"
+				ng-if="publicacion.tipo === 'P'">
+
+			<div class="post-content" ng-click="irDetallePregunta(publicacion._id, publicacion.titulo_url);">
+				<!-- Profile information -->
+				<div class="post-img-profile" style="background-image: url({{publicacion.usuario.photo}});"></div>
+				<a 	class="name name-link name-profile" 
+					data-template="user/usuario/perfil/modal-perfil.tpl.html" 
+					data-container="body"
+					data-content="{{publicacion.usuario.nombre}}"
+					bs-modal="modal"
+					ng-click="$event.stopPropagation();"
+					ng-bind="publicacion.usuario.nombre">								
+				</a>
+
+				<label class="time"><i class="fa fa-clock-o"></i> </label>
+				<time class="time" am-time-ago="publicacion.fecha"></time>	
+				<hr class="post-separator">
+				
+				<!-- Texto Post -->
+				<a 	class="post-title" 
+					ng-click="$event.stopPropagation();"
+					ng-bind="publicacion.titulo"
+					ui-sref="detallePregunta({ idPregunta : publicacion._id, titulo : publicacion.titulo_url })"></a>
+
+				<!-- Tags Post -->			
+				<div class="post-tags var-inline">
+					<i ng-if="mostrarTags(publicacion)" class="fa fa-tags"></i>
+					<label ng-repeat="tag in publicacion.tags">
+						<a 	ui-sref="hashtag({ tag : tag.substring(1, tag.length) })" 
+							ng-click="$event.stopPropagation();" 
+							ng-bind="tag">
+						</a>
+					</label>
+					<label ng-if="mostrarInstitucion(publicacion.institucion)">
+						<a href="" ng-click="$event.stopPropagation();">
+							<i class="fa fa-institution"></i>
+							{{publicacion.institucion.nombre}}
+						</a>
+					</label>
+					<label ng-if="mostrarCarrera(publicacion.carrera)">
+						<a ng-click="$event.stopPropagation();">
+							<i class="fa fa-graduation-cap"></i>
+							{{publicacion.carrera.nombre}}
+						</a>
+					</label>				
+				</div>
+			</div>
+
+			<!-- Acciones Post -->
+			<div class="post-action clearfix" ng-click="irDetallePregunta(publicacion._id, publicacion.titulo_url);">
+				<div class="row">
+					<div class="col-xs-10">
+						<span class="post-action-link"><i class="fa fa-comments"></i>{{ publicacion.cantidad_respuestas }}</span>
+						<span class="post-action-link"><i class="fa fa-thumbs-up"></i>{{ publicacion.ranking }}</span>		
+						<span class="post-action-link answered" ng-if="publicacion.esta_respondida"><i class="fa fa-check"></i>Respondida</span>
+					</div>
+					<div class="col-xs-2 text-right">
+						<a 	ng-click="$event.stopPropagation(); confirmarEliminarPublicacion(publicacion);" 
+							ng-if="publicacion.usuario.id_usuario === usuario.id"
+							class="post-action-link">					
+							<i class="fa fa-refresh fa-spin" ng-show="publicacion.eliminando"></i>
+							<i class="fa fa-trash" ng-hide="publicacion.eliminando"></i>										
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- FIN Publicaciones tipo Pregunta -->		
+	</div>
+
+	<!-- Banner test -->
+	<!-- <div class="banner-test">
+		<h5 class="text-center">Publicidad test <a href="#">Link interesante de la publicidad</a></h5>
+	</div> -->	
+
+	<div class="post-loader text-center" ng-show="cargandoPublicaciones">
+		<span><i class="fa fa-circle-o-notch fa-spin"></i> Cargando más posts...</span>
+	</div>
+</div>

@@ -1,0 +1,33 @@
+// 404
+
+.not-found {
+	text-align: center;
+	padding: 20px 10px;
+	margin-top: -50px;
+	h1 {
+		margin: 0;
+		@include montserrat(700, 48px, $black);
+		@include gridle_state(mobile) {
+			font-size: 30px;
+		}
+	}
+	p {
+		text-align: center;
+		@include open-sans(400, 18px, $gray);
+		margin: 5px 0 20px 0;
+		@include gridle_state(mobile) {
+			font-size: 16px;
+			margin-bottom: 10px;
+		}
+	}
+	#illustration {
+		margin-bottom: 25px;
+		max-width: 70%;
+		@include gridle_state(mobile) {
+			max-width: 60%;
+		}
+	}
+	#logo-404 {
+		margin-bottom: 10px;
+	}
+}

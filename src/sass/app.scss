@@ -1,0 +1,369 @@
+// Imports
+@import 'grid-settings';
+@import 'vars';
+@import 'colors';
+@import 'settings';
+@import 'bootstrap';
+@import 'font-awesome';
+@import 'fonts';
+@import 'mixins';
+@import 'modal-post';
+@import 'login';
+@import 'register';
+@import 'post';
+@import 'aside';
+@import 'profile';
+@import 'header';
+@import 'tutorial';
+@import 'notification';
+@import 'landing';
+@import 'bottom-bar';
+@import 'not-found';
+@import 'select-ui';
+@import 'hover';
+@import 'angular-motion';
+@import 'bootstrap-additions';
+@import 'animate';
+@import 'scroll';
+@import 'fade';
+
+// Common Styles
+
+html {
+	-webkit-font-smoothing: antialiased;
+}
+
+h2 {
+	@include lato(700, 22px, $black);
+}
+
+body {	
+	padding-top: 55px;
+	padding-bottom: 10px;
+	@include gridle_state(mobile tablet) {
+		padding-bottom: 45px;
+	}
+}
+
+a {
+	cursor: pointer !important;
+}
+
+label {
+	cursor: default !important;
+}
+
+textarea, input {
+	color: $black !important;
+}
+
+footer {
+	position: relative;
+	bottom: -10px;
+	margin-top: -10px;
+	@include gridle_state(mobile tablet) {
+		bottom: -50px;
+		margin-top: -50px;
+	};
+}
+
+.main-results {
+	text-align: center;
+	@include lato(400, 20px, darken($gray, 10%));
+	margin: 18px 0;
+	&.dialogue {
+		margin: 18px 0 0 0;
+		border: 1px dotted;
+		border-radius: 4px;
+		padding: 10px;
+	}
+}
+
+.separator-line {
+	background: $light-gray;
+	height: 1px;
+	width: 100%;
+	margin: 15px auto;
+}
+
+.bg-gray-body {
+	background: $bg-light-gray;
+}
+
+.bg-white-body {
+	background: white;
+	@include box-shadow(0px 1px 2px 0px rgba(0,0,0,0.4));
+}
+
+.content-post {
+	max-width: 700px;
+	margin: 0 auto;
+	padding: 0 10px;
+}
+
+.contact-box {
+	position: fixed;
+	z-index: 5;
+	cursor: pointer;
+	bottom: 0;
+	right: 10px;
+	background: rgba(0,0,0,0.5);
+	border-radius: 4px 4px 0 0;
+	padding: 5px 15px;
+	@include transition(0.3s);
+	a {
+		@include lato(400, 14px, white);
+	}
+	i {
+		margin-right: 5px;
+		@include transition(0.3s);
+	}
+	&:hover {
+		background: $black;
+		a {
+			text-decoration: none;
+		}
+		i {
+			color: $special-pink;
+		}
+	}
+}
+
+.app-footer {
+	background: $dark-green;
+	padding: 10px 0;
+	li, p {
+		margin: 0;
+		padding: 0;
+		@include open-sans(400, 14px, white);
+	}
+	i {
+		color: $special-pink;
+	}
+}
+
+.btn-success, .btn-primary, .btn-warning, .btn-default {
+	@include transition(0.25s);
+	@include box-shadow(0px 1px 2px 0px rgba(0,0,0,0.5));
+	&:hover {
+		@include box-shadow(0px 2px 4px 0px rgba(0,0,0,0.6));	
+	}
+}
+
+.btn-default {
+	color: $gray;
+	&:hover {
+		color: $gray;
+	}
+}
+
+.btn-blue {
+    @include button-variant(#fff, darken(#428bca, 6.5%), darken(#428bca, 6.5%));
+}
+
+.bg-filters {
+	background: $blue-base url('/img/bg-filters.png') no-repeat center center;
+	width: 100%;	
+	background-size: cover;
+	display: block;
+	padding: 10px 0;
+	@include gridle_hide(tablet);
+	a {
+		cursor : pointer;
+		margin: 0;
+		@include lato(400, 15px, white);
+	}
+}
+
+.menu {
+	padding-bottom: 10px;
+	border-bottom: 1px solid white;
+	cursor: pointer;
+	a:hover {
+		text-decoration: none;
+	}
+	.item {	
+		@include lato(700, 20px, $light-gray);
+		cursor: pointer;
+		@include transition(0.25s);
+		@include gridle_state(mobile tablet) {
+			font-size: 14px;
+			i {
+				display: block;
+			}
+		}
+	}
+	&.all-active {
+		border-color: $black;
+		a {
+			color: $black;
+		}
+	}
+	&.question-active {
+		border-color: $blue-base;
+		a {
+			color: $blue-base;
+		}
+	}
+	&.confession-active {
+		border-color: $purple-base;
+		a {
+			color: $purple-base;
+		}
+	}
+	&.all {
+		&:hover {
+			a {
+				color: $black;
+			}
+			border-color: $black;
+		}
+	}
+	&.question {
+		&:hover {
+			a {
+				color: $blue-base;
+			}
+			border-color: $blue-base;
+		}
+	}
+	&.confession {
+		&:hover {
+			a {
+				color: $purple-base;
+			}
+			border-color: $purple-base;
+		}
+	}
+}
+
+.nav-special-filters {
+	@include gridle_state(mobile) {
+		text-align: center;
+	}
+}
+
+.nav-filters {
+	margin-top: 20px;
+	float: right;
+	display: inline-block;
+	@include gridle_state(mobile) {
+		float: none;
+		text-align: center;
+		margin: 20px auto 0 auto;
+	}
+	a {
+		@include lato(400, 14px, $gray);
+		@include transition(0.25s);
+		margin-left: 10px;
+		@include gridle_state(mobile) {
+			margin: 0 2px;
+			font-size: 13px;
+		}
+		&:hover {
+			color: $black;
+			@include dotted;
+		}
+		&:focus {
+			text-decoration: none;
+		}
+	}
+	.active {
+		color: white;
+		background: $green-base;
+		padding: 2px 10px;
+		border-radius: 20px;
+		&:hover {
+			color: white;
+			border: none;
+		}
+	}
+	&:hover {
+		color: $green-base;
+		@include gridle_state(mobile) {
+			color: white;
+			text-decoration: none;
+		}
+	}
+}
+
+.btn-header {
+	@include gridle_state(mobile) {
+		margin: 0 2px;
+	}
+}
+
+.search-bar {
+	margin-top: 12px;
+	input {
+		border: 0;
+		border-right: 1px solid lighten($light-gray, 10%);
+	}
+	.input-group-addon {
+		border: 0;
+		background: $bg-light-gray;
+	}
+	.col-xs-3 {
+		padding: 0;
+	}
+	.form-first {
+		border-radius: 4px 0 0 4px;
+	}
+	.form-center {
+		border-radius: 0;
+	}
+	.btn-search-bar {
+		border-radius: 0 4px 4px 0;
+		border-left: none;
+		@include transition(0.3s);
+	}
+}
+
+input, .btn:hover, .btn:focus, .btn.focus, .popover:focus, .alert {	
+	outline-width 		: 0px !important; 
+}
+
+textarea {
+	resize : none !important;
+}
+
+// Secret Link
+.beta-text {
+	@include lato(400, 9px, rgba(255,255,255,0.8));
+	margin-left: 5px;
+}
+
+
+// Publicidad test
+
+.banner-test {
+	background: $purple-base;
+	padding: 2px;
+	margin: 8px 0;
+	border-radius: 4px;
+	margin-bottom: 10px;
+	@include box-shadow(0px 1px 2px 0px rgba(0,0,0,0.4));
+	h5 {
+		color: white;
+		a {
+			color: white;
+			text-decoration: underline;
+		}
+	}
+}
+
+// Términos y Condiciones
+
+.terms {
+	h1 {
+		@include montserrat(400, 22px, $black);
+		margin: 10px 0 20px 0;
+		text-transform: uppercase;
+		@include gridle_state(mobile) {
+			font-size: 18px;
+		}
+	}
+	h2 {
+		@include montserrat(400, 17px, $black);
+	}
+}

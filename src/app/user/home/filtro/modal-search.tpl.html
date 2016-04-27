@@ -1,0 +1,63 @@
+<div class="modal" tabindex="-1" role="dialog" ng-controller="modalSearchController">
+	<div class="modal-dialog">
+		<div class="login-module">
+			<div class="modal-head modal-search">
+				<h2 class="modal-title var-inline-block"><i class="fa fa-search"></i> Buscar</h2>
+				<div class="pull-right">
+					<a class="modal-close gray" ng-click="$hide()"><i class="fa fa-close"></i></a>
+				</div>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="input-group">
+						<span class="input-group-addon" id="buscar"><i class="fa fa-search"></i></span>
+						<input 	type="text" 
+								class="form-control form-first" 
+								placeholder="Buscar" 
+								aria-describedby="buscar" 
+								autofocus 
+								tabindex="1"
+								ng-model="textoBusqueda">
+						</input>
+					</div>
+					<hr>
+					<h4 class="search-dialog">¿O buscas algo más específico?</h4>
+					<div class="input-group ">
+						<span class="input-group-addon"><i class="fa fa-globe fa-fw"></i></span>
+						<input 	type="text" 
+								tabindex="2"
+					  			class="form-control form-first" 
+					  			placeholder="Establecimiento" 
+					  			aria-describedby="establecimiento"
+					  			ng-model="institucion"
+					  			ng-options="institucion as institucion.nombre for institucion  in buscarInstituciones($viewValue)"
+					  			data-template="template/typeahead.tpl.html"				  			
+					  			data-min-length="2"
+					  			data-container="body"
+					  			bs-typeahead/>
+					</div>					
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-graduation-cap fa-fw"></i></span>
+						<input 	type="text"
+								tabindex="3" 
+					  			class="form-control form-center" 
+					  			placeholder="Carrera" 
+					  			aria-describedby="carrera"
+					  			ng-model="carrera"
+					  			ng-options="carrera as carrera.nombre for carrera in buscarCarreras($viewValue)"
+					  			data-template="template/typeahead.tpl.html"
+					  			data-min-length="2"
+					  			data-container="body"
+					  			bs-typeahead/>
+					</div>
+				</form>
+			</div>
+
+			<div class="fb-bg search-bg text-center" tabindex="4" ng-click="buscarPublicaciones(institucion, carrera, textoBusqueda); $hide();">	
+				<a>
+					<i class="fa fa-search"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>

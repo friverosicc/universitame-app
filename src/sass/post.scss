@@ -1,0 +1,679 @@
+@import 'mixins';
+
+.post {
+	margin: 8px 0;
+	background: white;	
+	border-radius: $border-radius;
+	overflow: hidden;
+	@include box-shadow(0px 2px 4px 0px rgba(0,0,0,0.4));
+	@include transition(0.12s);
+	&:first-child {
+		margin-top: 12px;
+	}
+	.hide-icon {
+		@include gridle_state(mobile tablet) {
+			display: inline-block;
+		}
+		display: none;
+		@include transition(0.2s);
+	}
+
+	&:hover {
+		.hide-icon {
+			display: inline-block;
+		}
+	}
+	.fa-user-secret {
+		margin-right: 5px;
+	}
+}
+
+.name-profile{
+	position: absolute;	
+}
+
+.post-animation {
+	&:hover {
+		@include scale(1.001);
+		@include box-shadow(0px 4px 6px 2px rgba(0,0,0,0.4));
+	}
+}
+
+.post-bar {
+	border-left-width: 4px;	
+}
+
+.post-question {
+	border-top: 3px solid $blue-base;
+}
+
+.content-post > .row > .ng-enter {
+	@include animation-fadein(1s);
+}
+
+.content-post > .row > .ng-leave {
+	@include animation-fadeout(1s);
+}
+
+.post-comment-base.ng-enter {
+	@include animation-fadein(1s);
+}
+
+.post-comment-base.ng-leave {
+	@include animation-fadeout(1s);
+}
+
+.post-confession {
+	border-top: 3px solid $purple-base;
+}
+
+.post-thief {
+	border-top: 3px solid $black;
+	padding: 20px 30px;
+	@include gridle_state(mobile) {
+		padding: 10px;
+		text-align: center;
+	}
+	img {
+		margin: 0 auto;
+	}
+	h2 {
+		font-size: 18px;
+		color: $gray;
+	}
+}
+
+.post-comment-base {
+	background: #F2F2F2;
+	border-bottom: 1px solid $gray;
+	@include transition(0.3s);
+	&:first-child {
+		border-top: 1px solid $gray !important;
+	}
+}
+
+.post-content {
+	padding: 10px;
+	&.answered {
+		border-left: 3px solid $green-base;
+	}
+}
+
+.post-content-space {
+	// @include gridle(12);
+	// @include gridle(10, mobile);
+	padding: 0 15px;
+}
+
+.post-section {
+	margin: 25px auto 0 auto;
+}
+
+.post-separator {
+	margin: 5px 0;
+	border-top: solid 1px $light-gray;
+}
+
+.post-img-profile {
+	width: 32px;
+	height: 32px;
+	border-radius: 30px;
+	margin-right: 5px;
+	display: inline-block;
+	background: $bg-light-gray url('/img/img-profile-default.png') no-repeat center center;
+	background-size: cover;
+	position: relative;
+}
+
+.post-comment-bottom {
+	background: white;
+	padding: 10px;
+	.name, textarea {
+		margin-bottom: 5px;
+	}
+	textarea {
+		@include open-sans(400, 13px, $black);
+	}
+	.btn-info {
+		padding: 0;
+		margin-top: 5px;
+		@include lato(400, 14px, $gray);
+	}
+}
+
+.post-input-tag {
+	background: none;
+	border: 0;
+	color: $black;
+	width: 110px;
+	margin: 0 1px 5px 0;
+	border-radius: 2px;
+	padding-left: 5px;
+	@include transition(0.25s);
+	&:hover, &:focus {
+		background: white;
+	}
+}
+
+.post-comment-input {
+	padding: 0;
+	textarea {
+		height: 30px;
+		margin-top: 5px;
+		border: 1px solid $light-gray;
+		border-radius: $border-radius;
+		padding-left: 5px;
+		max-width: 100%;
+	}
+}
+
+.post-tags {
+	display: block;
+	i {
+		color: $gray;
+		margin-right: 2px;
+	}
+	label {
+		border: 1px dotted $gray;
+		padding: 0 4px;
+		margin: 0 4px 3px 0;
+		border-radius: 4px;
+		cursor: pointer;
+		@include transition(0.25s);
+		a {
+			@include lato(400, 11px, $gray);
+			@include transition(0.25s);
+			&:focus {
+				text-decoration: none;
+			}
+		}
+		i {
+			@include transition(0.25s);
+		}
+		&:hover {
+			background: $gray;
+			a {
+				color: white;
+				text-decoration: none;
+			}
+			i {
+				color: white;
+			}
+		}
+	}
+}
+
+.post-action {
+	background: $bg-light-gray;
+	padding: 5px 10px;
+	.post-action-link {
+		color: $gray;
+	}
+}
+
+.post-action-link {
+	@include lato(400, 12px, $gray);
+	@include transition(0.4s);
+	margin: 0;
+	i {
+		margin-right: 5px;
+	}
+	&.answered {
+		color: $green-base;
+	}
+	.fa-trash:hover, .fa-flag:hover {
+		color: rgba(0,0,0,0.3) !important;
+		border: none !important;
+	}
+	&.action-special {
+		padding: 3px 10px;
+		color: white;
+		font-weight: 700;
+		border-radius: 30px;
+		border: none;
+		display: inline-block;
+		background: $green-base;
+		margin-bottom: 5px;
+		&:before {
+			content: "Mejor Respuesta";
+
+		}
+		&.user:hover {
+			color: white;			
+			background: $gray;
+			&:before {
+				content: "Quitar como mejor respuesta";
+			}
+		}
+	}
+}
+
+.action-special.ng-hide-remove {
+	-webkit-animation: fadeIn 2s;
+	-moz-animation: fadeIn 2s;
+	-ms-animation: fadeIn 2s;
+	animation: fadeIn 2s;
+}
+
+.post-action-link.ng-hide-add {	
+	display: none;
+}
+
+
+a.post-action-link {
+	&:hover {
+		color: $black;
+		@include dotted;
+	}
+}
+
+span.post-action-link {
+	margin: 0 5px;
+	cursor: default;
+	&.hover {
+		border : none;
+	}
+}
+
+.name-link {
+	cursor: pointer;
+	&:hover, &:focus {
+		color: $black;
+	}
+}
+
+.name {
+	@include lato(400, 13px, $black);
+	display: inline-block;
+	margin-right: 5px;
+	margin-bottom: 0;
+}
+
+.time {
+	@include lato(400, 12px, $gray);	
+	display: inline-block;
+	margin-bottom: 0;
+	i {
+		margin-right: 5px;
+	}
+}
+
+.post-title {
+	@include open-sans(600, 16px, $black);
+	margin: 0 0 10px;
+	display: block;
+}
+
+a.post-title {
+	cursor: pointer;
+	&:hover, &:focus {
+		text-decoration: none;
+		color: $black;
+	}
+}
+
+.post-comment {
+	@include open-sans(400, 13px, $black);
+	margin: 0 0 10px 0;
+	white-space: pre-wrap;
+}
+
+.career {
+	display: block;
+	cursor: pointer;
+	color: $gray;
+	margin-bottom: 3px;
+	a {
+		@include open-sans(400, 12px, $gray);
+		&:hover, &:focus {
+			color: $gray;
+			@include dotted;
+		}
+	}
+	&:hover, &:focus {
+		color: $gray;
+	}
+}
+
+.post-open {
+	margin-bottom: 20px;
+}
+
+.btn-back {
+	border: 1px solid $light-gray;
+	border-radius: $border-radius;
+	color: $light-gray;
+	background: white;
+	@include transition(0.3s);
+	&:hover {
+		background: $light-gray;
+		color: white;
+	}
+}
+
+.btn-choose-answer {
+	padding-left: 0;
+	font-size: 12px;
+	&:hover, &:focus {
+		color: $green-base;
+	}
+}
+
+.post-votes {
+	font-size: 16px;
+	display: inline-block;
+	margin: 0;
+	text-align: right;
+	padding-right: 20px;
+	a {
+		display: block;
+		margin: 10px auto;
+		color: $light-gray;
+		@include transition(0.25s);
+	}
+	.up-vote:hover, .up-vote:active, .up-vote:focus, .up-vote-selected {
+		color: $green-base;
+	}	
+
+	.down-vote:hover, .down-vote:active, .down-vote:focus, .down-vote-selected {
+		color: $special-pink;
+	}
+	label {
+		display: block;
+		margin: 0 auto;
+	}
+}
+
+.up-vote-selected-add, .down-vote-selected-add {
+	> i {
+		-webkit-animation: zoomIn 1s;
+		-moz-animation: zoomIn 1s;
+		-ms-animation: zoomIn 1s;
+		animation: zoomIn 1s;
+	}
+}
+
+.up-vote-selected-remove, .down-vote-selected-remove {
+	> i {
+		-webkit-animation: zoomOut 1s;
+		-moz-animation: zoomOut 1s;
+		-ms-animation: zoomOut 1s;
+		animation: zoomOut 1s;
+	}
+}
+.post-votes-top {
+	float: right;
+	font-size: 16px;
+	margin: 0;
+	padding: 4px;
+	a {
+		color: $light-gray;
+		@include transition(0.25s);
+	}
+	.up-vote:hover, .up-vote:active, .up-vote:focus, .up-vote-selected {
+		color: $green-base;
+	}
+
+	.down-vote:hover, .down-vote:active, .down-vote:focus, .down-vote-selected {
+		color: $special-pink;
+	}
+	label {
+		margin: 0 10px;
+	}	
+}
+
+.post-default {
+	cursor: default;
+}
+
+.post-comment-separator {
+	background: $light-gray;
+	padding: 2px 0;
+	color: white;
+	label {
+		margin: 0;
+		padding: 0;
+	}
+}
+
+.post-loader {
+	margin: 10px 0 20px 0;
+	padding-bottom: 30px;
+	span {
+		@include lato(400, 14px, $gray);
+		i {
+			margin-right: 5px;
+		}
+	}
+}
+
+.new-comment {
+	.name, .time {
+		font-size: 11px;
+	}
+	.name:hover {
+		color: black;
+	}
+	.comment {
+		@include open-sans(400, 11px, $black);
+	}
+	.btn-link {
+		padding: 0;
+		border: 0;
+		@include lato(400, 13px, $gray);
+	}
+	.comment-box {
+		textarea {
+			@include open-sans(400, 11px, $black);
+			margin-top: 5px;
+			margin-bottom: 5px;
+		}
+	}
+}
+
+.alert-confirm {
+	background: #FF7795;
+	@include box-shadow(0px 1px 2px 0px rgba(0,0,0,0.5));
+	color: white;
+	border: 0;
+	@include gridle_state(mobile) {
+		width: 90%;
+	}
+	span {
+		position: relative;
+		top: 2px;
+		@include gridle_state(mobile) {
+			display: block;
+			margin-bottom: 10px;
+		}
+	}
+}
+
+.btn-confirmation {
+	padding: 0;
+	height: 30px;
+	width: 30px;
+	text-align: center;
+	border: 1px solid white;
+	border-radius: 50%;
+	color: white;
+	@include transition(0.3s);
+	i {
+		position: relative;
+	}	
+	&:hover, &:focus {
+		background: white;
+		border: 1px solid white;
+		.fa-close {
+			color: $special-pink;
+		}
+		.fa-check {
+			color: $green-base;
+		}
+	}
+	&.color {
+		border-color: $gray;
+		color: $gray;
+		margin-left: 5px;
+		&:hover {
+			.fa {
+				color: white;
+			}
+		}
+		&.check:hover {
+			background-color: $green-base;
+			border-color: $green-base;
+		}
+		&.wrong:hover {
+			background-color: $special-pink;
+			border-color: $special-pink;
+		}
+	}
+}
+
+.author-confession {
+	position: relative;
+	top: 5px;
+}
+
+//Admin
+
+.module {
+	padding: 14px 10px;
+	border-bottom: 1px solid $light-gray;
+	cursor: pointer;
+	@include transition(0.25s);
+	@include lato(400, 14px, $gray);
+	&:last-child {
+		border-bottom: none;
+	}
+	&:hover {
+		background: $bg-light-gray;
+	}
+	&.active {
+		border-left: 5px solid $blue-base;
+		a {
+			color: $black;
+		}
+		.fa {
+			color: $black;
+		}
+		.fa-heart {
+			color: $special-pink;
+		}
+		.badge {
+			background: $special-pink;
+		}
+	}
+	.fa {
+		margin-right: 5px;
+	}
+	.badge {
+		background: $gray;
+	}
+	a {
+		color: $gray;
+		&:hover {
+			text-decoration: none;
+		}
+	}
+}
+
+.admin {
+	h4 {
+		margin: 20px 0 10px 0;
+		color: $gray;
+	}
+}
+
+.admin-messages {
+	@extend .module;
+	padding: 8px 10px;
+	cursor: pointer;
+	a {
+		color: black
+	}
+	.post-img-profile {
+		height: 28px;
+		width: 28px;
+	}
+	.time {
+		font-size: 11px;
+	}
+	.subject {
+		white-space: nowrap;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	    @include open-sans(400, 13px, $gray);
+		margin: 6px 0;
+	}
+	.actions {
+		.fa {
+			font-size: 18px;
+			color: $gray;
+			margin: 6px 8px;
+			@include transition(0.25s);
+		}
+		.fa-ellipsis-v:hover {
+			color: $black
+		}
+		.fa-check-circle {
+			color: $green-base;
+		}
+	}
+}
+
+.fixed-menu {
+	@include gridle_hide(mobile tablet);
+	@include gridle(3);
+	position: fixed;
+	display: block;
+	height: 100%;
+	max-width: 370px;
+}
+
+.fixed-content {
+	@include gridle(12, mobile tablet);
+	@include gridle(8);
+	position: relative;
+	display: block;
+	float: right;
+	@include gridle_state(mobile tablet) {
+		left: 0;
+		width: 100%;
+	}
+}
+
+.title-logo {
+	@include open-sans(300, 20px, white);
+	position: relative;
+	top: 5px;
+	margin-left: 8px;
+}
+
+.profile-name {
+	@include lato(400, 16px, white);
+	position: relative;
+	top: 2px;
+	margin: 0 10px 0 0;
+}
+
+.select-filter {
+	width: 130px;
+	background: $bg-light-gray;
+	position: relative;
+	top: 14px;
+}
+
+.modal-sugerencia {
+	p, .modal-textarea {
+		font-size: 13px;
+		margin-top: 6px;
+	}
+	textarea {
+		font-size: 13px;
+	}
+	hr {
+		margin: 20px 0;
+	}
+}

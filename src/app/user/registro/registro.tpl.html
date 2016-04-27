@@ -1,0 +1,211 @@
+<div>
+	<nav class="navbar reg-header navbar-fixed-top">
+		<div class="container">
+			<div class="text-center">
+				<img src="img/iso-logo.svg" class="img-responsive buzz var-inline-block" alt="Responsive image" style="margin-right: 5px" >
+				<label class="beta-secret-link">BETA</label>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="row">
+			<div class="text-center wizard">
+				<a href="#" ng-click="stepSelected = 0" class="wiz-step" ng-class="{'active' : 0 == stepSelected, 'past' : 0 < stepSelected}">1</a>
+				<a href="#" ng-click="stepSelected = 1" class="wiz-step" ng-class="{'active' : 1 == stepSelected, 'past' : 1 < stepSelected}">2</a>
+				<a href="#" ng-click="stepSelected = 2" class="wiz-step" ng-class="{'active' : 2 == stepSelected, 'past' : 2 < stepSelected}">3</a>
+				<a href="#" ng-click="stepSelected = 3" class="wiz-step" ng-class="{'active' : 3 == stepSelected, 'past' : 3 < stepSelected}">4</a>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Step 1 -->
+	<div class="container" ng-show="stepSelected == 0">
+		<div class="row">
+			<div class="text-center">
+				<h1 class="reg-title">¡Bienvenid@ <strong>{{usuario.nombre}}</strong>!</h1>
+				<p class="reg-p">¿Nos podrías contar algunas cosas de ti?</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="text-center">
+				<button class="btn btn-primary btn-lg" ng-click="setStep(stepSelected + 1)">Empezar</button>
+			</div>
+		</div>
+	</div>
+	<!-- End Step 1 -->
+
+	<!-- Step 2 -->
+	<div class="container" ng-show="stepSelected == 1">
+		<div class="row">
+			<div class="text-center">
+				<h1 class="reg-title reg-section">¿Cuál es tu sexo?</h1>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-offset-3 col-sm-3 col-xs-6 text-center">
+				<a href="#" ng-click="setSexo('M')" class="reg-icn reg-male" ng-class="{'reg-male-active' : usuario.sexo === 'M'}"><i class="fa fa-male"></i></a>
+				<p class="reg-p reg-option">Hombre</p>
+			</div>
+			<div class="col-sm-3 col-xs-6 text-center">
+				<a href="#" ng-click="setSexo('F')" class="reg-icn reg-female" ng-class="{'reg-female-active' : usuario.sexo === 'F'}"><i class="fa fa-female"></i></a>
+				<p class="reg-p reg-option">Mujer</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="text-center col-xs-12 reg-link">
+				<a ng-click="setSexo('')">Prefiero no especificar</a>
+			</div>
+			<div class="text-center col-xs-12 reg-buttons">
+				<button class="btn btn-default btn-lg" ng-click="setStep(stepSelected - 1)">Volver</button>
+				<button class="btn btn-primary btn-lg" ng-click="setStep(stepSelected + 1)">Siguiente</button>
+			</div>
+		</div>
+	</div>
+	<!-- End Step 2 -->
+		
+	<!-- Step 3 -->
+	<div class="container" ng-show="stepSelected == 2">
+		<div class="row">
+			<div class="text-center">
+				<h1 class="reg-title reg-section">¿En qué estás?</h1>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-offset-2 col-sm-4 col-xs-6 text-center">
+				<a href="#" ng-click="setTipoUsuario('FU')" ng-class="{'reg-futuni-active' : usuario.tipo_usuario === 'FU'}" class="reg-icn reg-futuni"><i class="fa fa-bicycle"></i></a>
+				<p class="reg-p reg-option">Futuro Universitario</p>
+			</div>
+			<div class="col-sm-4 col-xs-6 text-center">
+				<a href="#" ng-click="setTipoUsuario('UN')" ng-class="{'reg-uni-active' : usuario.tipo_usuario === 'UN'}" class="reg-icn reg-uni"><i class="fa fa-rocket"></i></a>
+				<p class="reg-p reg-nomargin">Universitario</p>
+				<p class="reg-p reg-special">(actual o egresado)</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="text-center col-xs-12 reg-buttons">
+				<button class="btn btn-default btn-lg" ng-click="setStep(stepSelected - 1)">Volver</button>
+				<button class="btn btn-primary btn-lg" ng-click="setStep(stepSelected + 1)">Siguiente</button>
+			</div>
+		</div>
+	</div>
+	<!-- End Step 3 -->
+
+	<!-- Step 4 -->
+	<div class="container" ng-show="stepSelected == 3">
+		<div class="row">
+			<div class="text-center">
+				<h1 class="reg-title reg-section">Algunos datos más y empezamos</h1>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="text-center" ng-switch on="usuario.tipo_cuenta">			
+					<img ng-switch-when="facebook" ng-src="{{usuario.photo}}" class="img-circle" alt="foto perfil"/>
+					<span ng-switch-when="universitame" class="fa fa-user" alt="foto perfil" style="font-size:10em !important;"/>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-4 col-sm-offset-4 col-xs-12">
+				<form class="reg-form">				
+					
+					<ui-select 	ng-model="usuario.pais" 
+								theme="bootstrap" 
+								ng-disabled="disabled" 
+								reset-search-input="false">
+
+						<ui-select-match placeholder="País">
+							{{usuario.pais.nombre}}
+						</ui-select-match>
+
+						<ui-select-choices repeat="pais in paises | filter : $select.search" > 
+							<div ng-bind-html="pais.nombre | highlight : $select.search">{{pais.nombre}}</div>
+						</ui-select-choices>
+	  				</ui-select>
+
+	  				<ui-select 	ng-model="usuario.ciudad" 
+								theme="bootstrap" 
+								ng-disabled="disabled" 
+								reset-search-input="false"
+								ng-hide="usuario.tipo_usuario === 'FU'">
+
+						<ui-select-match placeholder="Ciudad">
+							{{usuario.ciudad.nombre}}
+						</ui-select-match>						
+
+						<ui-select-choices 	repeat="ciudad in ciudades track by $index" 
+											refresh="buscarCiudades($select.search)" 
+											refresh-delay="0"> 
+							<div ng-bind-html="ciudad.nombre | highlight : $select.search">{{ciudad.nombre}}</div>
+						</ui-select-choices>
+	  				</ui-select>
+
+	  				<ui-select 	ng-model="usuario.institucion" 
+								theme="bootstrap" 
+								ng-disabled="disabled" 
+								reset-search-input="false"
+								ng-hide="usuario.tipo_usuario === 'FU'">
+
+						<ui-select-match placeholder="Institución">
+							{{usuario.institucion.nombre}}
+						</ui-select-match>
+						
+						<ui-select-choices 	repeat="institucion in instituciones track by $index" 
+											refresh="buscarInstituciones($select.search)" 
+											refresh-delay="0">
+							<div ng-bind-html="institucion.nombre | highlight : $select.search">{{institucion.nombre}}</div>
+						</ui-select-choices>
+	  				</ui-select>
+
+	  				<ui-select 	ng-model="usuario.carrera" 
+								theme="bootstrap" 
+								ng-disabled="disabled" 
+								reset-search-input="false"
+								ng-hide="usuario.tipo_usuario === 'FU'">
+
+						<ui-select-match placeholder="Carrera">
+							{{usuario.carrera.nombre}}
+						</ui-select-match>
+
+						<ui-select-choices 	repeat="carrera in carreras track by $index" 
+											refresh="buscarCarreras($select.search)" 
+											refresh-delay="0">						
+							<div ng-bind-html="carrera.nombre | highlight : $select.search">{{carrera.nombre}}</div>
+						</ui-select-choices>
+	  				</ui-select>
+										
+					<div class="col-xs-6 input-nopad" style="padding-right:5px;" ng-hide="usuario.tipo_usuario === 'FU'">
+						<input type="year" class="form-control input-lg" placeholder="Año Ingreso" ng-model="usuario.anio_ingreso"/>
+					</div>
+
+					<div class="col-xs-6 text-left input-nopad" style="padding-left:5px;" ng-hide="showAnioTermino || usuario.tipo_usuario === 'FU'">
+						<a href="#" class="btn btn-link animate-show" ng-init="showAnioTermino = false" ng-click="showAnioTermino = true">
+							<i class="fa fa-plus"></i>Añadir Año Término
+						</a>
+					</div>
+					
+					<div class="col-xs-6 text-left input-nopad" style="padding-left:5px;" ng-show="showAnioTermino">
+						<input type="year" class="form-control input-lg" placeholder="Año Egreso" ng-model="usuario.anio_termino"/>
+					</div>
+
+					<textarea class="form-control input-lg" ng-model="usuario.comentario" rows="5" placeholder="Cuéntanos algo de ti, qué buscas en esta comunidad, qué te gusta, etc."></textarea>
+				</form>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="text-center col-xs-12 reg-buttons">
+				<button class="btn btn-default btn-lg" ng-click="setStep(stepSelected - 1)">Volver</button>
+				<a class="btn btn-primary btn-lg" ng-click="finalizarRegistro()">Finalizar</a>
+			</div>
+		</div>
+	</div>
+	<!-- End Step 4 -->	
+</div>

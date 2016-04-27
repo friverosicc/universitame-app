@@ -1,0 +1,218 @@
+<!-- Header -->
+<div ui-view="app-header"></div>
+<!-- End Header -->
+
+<!-- Contenido eliminado -->
+<div class="container" ng-show="!existeContenido">
+	<div class="content-post">
+		<br/>
+		<div class="row">
+			<div class="post-content-space col-sm-2">
+				<img src="img/thief-gnome.svg" class="img-responsive" alt="Duende Universitame">
+			</div>
+			<div class="post-content-space col-sm-10">
+				<h2>Ups! El contenido que buscas fue borrado o simplemente ha sido robado por pequeños duendes de Universítame.</h2>
+				<button class="btn btn-success btn-sm" ng-click="goBack()">Volver</button>
+			</div>
+		</div>		
+	</div>
+</div>
+<!-- Fin - Contenido eliminado -->
+
+<div class="container" ng-show="existeContenido">
+	<div class="content-post">
+		<div class="row">
+			<div class="post post-confession post-open post-default">
+				<div class="post-content post-bar">
+				<!-- Profile information -->
+					<i class="fa fa-user-secret" style="font-size : 32px;"></i> 
+					<label 	class="name name-profile" 
+						ng-bind="publicacion.usuario.nombre">
+					</label>
+
+					<label class="time"><i class="fa fa-clock-o"></i> </label>
+					<time class="time" am-time-ago="publicacion.fecha"></time>
+
+					<!-- Puntuación en desktop -->
+					<div class="post-votes-top hidden-xs">
+						<a 	class="down-vote"
+							ng-class="{ 'down-vote-selected' : publicacion.usuarioReprueba }"
+							ng-click="evaluarPublicacion(false)">
+							<i class="fa fa-thumbs-down"></i>
+						</a>
+						<label>{{ publicacion.ranking }}</label>
+						<a 	class="up-vote"
+							ng-class="{ 'up-vote-selected' : publicacion.usuarioAprueba }"
+							ng-click="evaluarPublicacion(true)">
+							<i class="fa fa-thumbs-up"></i>
+						</a>
+					</div>
+			
+					<!-- Texto Post -->
+					<div class="row">
+						<div class="post-content-space col-xs-10 col-sm-12">
+							<hr class="post-separator">
+							<p class="post-comment" ng-bind-html="publicacion.detalle | linky : '_blank' | universitameLinky : '_blank'"></p>
+						</div>
+						<div class="text-right col-xs-2 post-votes visible-xs">
+							<a 	class="up-vote"
+								ng-class="{ 'up-vote-selected' : publicacion.usuarioAprueba }"
+								ng-click="evaluarPublicacion(true)">
+								<i class="fa fa-thumbs-up"></i>
+							</a>
+
+							<label>{{ publicacion.ranking }}</label>
+
+							<a 	class="down-vote"
+								ng-class="{ 'down-vote-selected' : publicacion.usuarioReprueba }"
+								ng-click="evaluarPublicacion(false)">
+								<i class="fa fa-thumbs-down"></i>
+							</a>
+						</div>
+					</div>
+
+					<div class="clearfix">
+						<div class="row">
+							<div class="col-xs-10 post-tags var-inline">
+								<i ng-if="mostrarTags(publicacion)" class="fa fa-tags"></i>							
+								<label ng-if="mostrarInstitucion(publicacion.institucion)">
+									<a href="#">
+										<i class="fa fa-institution"></i>
+										{{publicacion.institucion.nombre}}
+									</a>
+								</label>
+								<label ng-if="mostrarCarrera(publicacion.carrera)">
+									<a href="#">
+										<i class="fa fa-graduation-cap"></i>
+										{{publicacion.carrera.nombre}}
+									</a>
+								</label>				
+							</div>
+							<div class="col-xs-2 text-right">
+								<a 	class="post-action-link"
+									ng-if="publicacion.usuario.id_usuario === usuario._id"
+									ng-click="eliminarPublicacion()">									
+									<i class="fa fa-refresh fa-spin" ng-show="publicacion.eliminando"></i>
+									<i class="fa fa-trash" ng-hide="publicacion.eliminando"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+
+				<div class="text-center post-comment-separator">
+					<label>
+						<i class="fa fa-comments"></i> Comentarios
+					</label>
+				</div>
+
+				<!-- Respuesta del post -->
+				<div class="post-comment-base" ng-repeat="comentario in comentarios | orderBy:'fecha'">
+					<div class="post-content">			
+						<!-- Profile information -->
+						<div class="post-img-profile" style="background-image: url({{comentario.usuario.photo}});"></div>
+							
+						<a 	class="name name-link name-profile"
+							data-template="user/usuario/perfil/modal-perfil.tpl.html" 
+							data-container="body"
+							bs-modal="modal"
+							ng-bind="comentario.usuario.nombre">
+						</a>															
+						<label class="time"><i class="fa fa-clock-o"></i> </label>
+						<time class="time" am-time-ago="comentario.fecha"></time>
+
+						<div class="post-votes-top hidden-xs">
+							<a 	class="down-vote" 
+								ng-class="{ 'down-vote-selected' : comentario.usuarioReprueba }"
+								ng-click="evaluarComentario(comentario, false)">
+								<i class="fa fa-thumbs-down"></i>
+							</a>
+
+							<label>{{ comentario.ranking }}</label>
+
+							<a 	class="up-vote" 
+								ng-class="{ 'up-vote-selected' : comentario.usuarioAprueba }"
+								ng-click="evaluarComentario(comentario, true)">
+								<i class="fa fa-thumbs-up"></i>
+							</a>
+						</div>
+						
+						<div class="row">
+							<div class="post-content-space col-xs-10 col-sm-12">
+								<!-- Fin Profile Information -->
+								<hr class="post-separator">
+								<!-- Comentario -->								
+								<p class="post-comment" ng-bind-html="comentario.comentario  | linky : '_blank' | universitameLinky : '_blank'"></p>
+							</div>
+							<div class="pull-right col-xs-2 post-votes visible-xs">
+								<a 	class="up-vote" 
+									ng-class="{ 'up-vote-selected' : comentario.usuarioAprueba }"
+									ng-click="evaluarComentario(comentario, true)">									
+									<i class="fa fa-thumbs-up"></i>
+								</a>
+								<label>{{ comentario.ranking}}</label>
+								<a 	class="down-vote" 
+									ng-class="{ 'down-vote-selected' : comentario.usuarioReprueba }"
+									ng-click="evaluarComentario(comentario, false)">
+									<i class="fa fa-thumbs-down"></i>
+								</a>
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<div class="row">
+								<div class="col-xs-10 ">
+								</div>
+								<div class="col-xs-2 text-right">
+									<a 	class="post-action-link" 
+										ng-if="comentario.usuario.id_usuario === usuario._id"
+										ng-click="eliminarComentario(comentario)">
+										<i class="fa fa-trash" ng-hide="comentario.eliminando"></i>
+										<i class="fa fa-refresh fa-spin" ng-show="comentario.eliminando"></i>
+									</a>
+
+									<!-- <a 	class="post-action-link" 
+										data-title="Denunciar" 
+										ng-if="respuesta.usuario.email != usuario.email"
+										bs-tooltip>
+										<i class="fa fa-flag"></i>
+									</a> -->
+								</div>
+							</div>	
+						</div>					
+						<!-- Fin Comentario/Respuesta -->
+					</div>
+				</div>			
+				<!-- Fin Respuesta del post -->							
+
+				<div class="post-comment-bottom clearfix" ng-show="usuarioConectado">
+					<div class="post-img-profile" style="background-image: url({{usuario.photo}});"></div>
+					<label class="name name-link">
+						{{usuario.nombre}}								
+					</label>
+					<form name="comentarioForm">
+						<textarea 	name="comentario" 
+									class="form-control msd-elastic" 
+									ng-model="comentario" 
+									ng-required="true"
+									placeholder="Escribe un comentario...">
+						</textarea>
+					</form>
+					<div class="pull-right">
+						<button ng-click="comentar()" 
+								ng-disabled="!esPosibleComentar()"
+								class="btn btn-success">
+								Comentar
+						</button>
+					</div>
+					<!-- <div class="pull-left">
+						<button class="btn btn-link btn-info">
+							<i class="fa fa-info-circle"></i> Tips para comentarios
+						</button>
+					</div> -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

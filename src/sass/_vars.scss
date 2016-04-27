@@ -1,0 +1,21 @@
+$border-radius: 4px;
+
+.var-inline-block {
+	display: inline-block !important;
+}
+
+.hide-mobile {
+	font-weight: 400;
+	@include gridle_state(mobile) {
+		display: none !important;
+	}
+}
+
+.var-inline {
+	display: inline !important;
+}
+
+@mixin dotted {
+	border-bottom: 1px dotted;
+	text-decoration: none;
+}

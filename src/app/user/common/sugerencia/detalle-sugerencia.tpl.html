@@ -1,0 +1,37 @@
+<div class="modal" tabindex="-1" role="dialog" ng-controller="detalleSugerenciaUserController">
+	<div class="modal-dialog">
+		<div class="modal-content">						
+			<div class="modal-head modal-base">
+				<h2 class="modal-title var-inline-block">Sugerencia/Respuesta</h2>
+
+				<div class="pull-right">
+					<a class="modal-close white" ng-click="$hide()"><i class="fa fa-close"></i></a>
+				</div>
+			</div>
+			<div class="modal-body modal-sugerencia">
+				<div class="post-img-profile" style="background-image: url({{sugerencia.usuario.photo}});"></div>
+				<a class="name name-link name-profile" ng-bind="sugerencia.usuario.nombre"></a>
+				<label class="time"><i class="fa fa-clock-o"></i> </label>
+				<time class="time" am-time-ago="sugerencia.fecha"></time>
+
+				<div>
+					<p ng-bind="sugerencia.detalle"></p>
+				</div>
+				
+				<hr class="post-separator">								
+				
+				<div class="post-img-profile" style="background-image: url();"></div>
+				<a class="name name-link name-profile">Univers&iacute;tame</a>
+
+				<label class="time">
+					<i class="fa fa-clock-o"></i> 
+				</label>
+				<time class="time" am-time-ago="sugerencia.respuesta.fecha"></time>
+
+				<div>
+					<p ng-bind="sugerencia.respuesta.detalle"></p>
+				</div>								
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,52 @@
+<div class="aside" tabindex="-1" role="dialog" ng-controller="menuController">
+	<div class="aside-dialog">
+		<div class="aside-content">
+			
+			<div class="aside-body">
+				<div class="pull-right">
+					<a class="modal-close" ng-click="$hide()"><i class="fa fa-close"></i></a>
+				</div>
+
+				<div class="text-center" >
+					<div ng-if="showPhoto" class="aside-img-profile" style="background-image: url({{photo}})"></div>										
+					<h4 ng-bind="nombre"></h4>
+				</div>
+
+				<div class="aside-links">
+					<a ui-sref="perfil({ id : id })" ng-click="$hide()"><i class="fa fa-user fa-fw"></i> Perfil</a>
+					<!-- <a href="" ng-click="$hide()"><i class="fa fa-wrench"></i> Cambiar Contraseña</a> -->
+
+					<a 	data-animation="am-fade-and-scale"  
+						data-template="user/common/sugerencia/sugerencia.tpl.html" 
+						data-container="body" 
+						bs-modal="modal" 
+						ng-click="$hide()">
+						<i class="fa fa-heart fa-fw"></i> ¡Ayúdanos a mejorar!
+					</a>
+
+					<a 	data-animation="am-fade-and-scale"  
+						data-template="user/common/tutorial/tutorial.tpl.html" 
+						data-container="body" 
+						bs-modal="modal" 
+						ng-click="$hide()"><i class="fa fa-question fa-fw"></i> Ayuda
+					</a>
+					
+					<a 	data-animation="am-fade-and-scale"  
+						data-template="user/common/politicas/terms.tpl.html" 
+						data-container="body" 
+						bs-modal="modal" 
+						ng-click="$hide()">
+						<i class="fa fa-book fa-fw"></i> Términos y Condiciones
+					</a>
+				</div>
+
+			</div>
+			
+			<div class="aside-footer aside-links">
+				<div class="text-left">
+					<a ui-sref="logout"><i class="fa fa-power-off fa-fw"></i> Cerrar Sesión</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

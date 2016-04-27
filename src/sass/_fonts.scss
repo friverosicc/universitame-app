@@ -1,0 +1,36 @@
+// 1. Imports (from Google Fonts):
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,700,300,600,400);
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,400italic);
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+// @import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic);
+
+// 2. Mixins:
+
+@mixin open-sans($weight, $size, $color) {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: $weight;
+	font-size: $size;
+	color: $color;
+}
+
+@mixin lato($weight, $size, $color) {
+	font-family: 'Lato', sans-serif;
+	font-weight: $weight;
+	font-size: $size;
+	color: $color;
+}
+
+@mixin montserrat($weight, $size, $color) {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: $weight;
+	font-size: $size;
+	color: $color;
+}
+
+// @mixin pt-sans($weight, $size, $color) {
+// 	font-family: 'PT Sans', sans-serif;
+// 	font-weight: $weight;
+// 	font-size: $size;
+// 	color: $color;
+// }

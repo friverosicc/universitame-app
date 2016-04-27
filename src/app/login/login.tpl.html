@@ -1,0 +1,165 @@
+<nav class="navbar reg-header navbar-fixed-top">
+	<div class="container">
+		<div class="text-center">
+			<a href="#"><img alt="Universitame" class="buzz" src="img/iso-logo.svg"></a>
+		</div>
+	</div>
+</nav>
+<div class="login-module">
+	<div class="login-content">
+		<div class="text-center">				
+			<h3 class="login-title login-title-green">Iniciar Sesión</h3>
+		</div>
+	
+		<form class="login-input" name="loginForm">	
+			<input 	type="email" 
+					name="email"
+					class="form-control" 
+					placeholder="Correo Electrónico" 
+					autofocus
+					tabindex="1"
+					ng-model="usuario.email"
+					ng-required="true"/>
+
+			<p class="error" ng-show="showError(loginForm.email, 'email')">No parece un correo correcto</p>
+			<p class="error" ng-show="showError(loginForm.email, 'required')">El correo es requerido</p>
+
+			<input 	type="password" 
+					name="password"
+					class="form-control" 
+					placeholder="Contraseña" 
+					tabindex="2"
+					ng-model="usuario.password"
+					ng-required="true"
+					ng-enter="ingresar()"></input>
+
+			<p class="error" ng-show="esErrorLogin" ng-init="esErrorLogin = false; msgError = ''">{{msgError}}</p>		
+			<p class="error" ng-show="showError(loginForm.password, 'required')">La contraseña es requerida</p>
+			<p class="error" ng-bind="msgServer"></p>
+
+			<!-- <a class="btn btn-link btn-forgot">¿Olvidaste tu contraseña?</a> -->
+			
+			<!-- <div class="checkbox">
+				<label>
+					<input type="checkbox" name="recordar" value="Remember Password" ng-model="usuario.recordar" tabindex="3"></input>
+					No cerrar sesión
+				</label>
+			</div> -->
+
+		</form>
+		<a 	class="btn btn-success btn-lg col-xs-12" 
+			style="margin-bottom: 10px;"
+			tabindex="4"
+			ng-disabled="!sePuedeIngresar()"
+			ng-click="ingresar()"
+			ng-enter="ingresar()">Ingresar</a>
+
+		<div class="text-center" style="display:none;">
+			<a href="#" id="login-forgot">¿Has olvidado tu contraseña?</a>
+		</div>
+
+		<hr>
+
+		<div class="text-center">
+			<p id="login-dialog">¿No tienes cuenta?</p>
+		</div>
+
+		<div class="text-center">
+			<a ui-sref="cuentaNueva" class="login-title login-title-blue" tabindex="4">Crear Cuenta</a>
+		</div>
+	</div>
+
+	<div class="fb-bg" tabindex="5" ng-click="facebookLogin()" ng-enter="facebookLogin()">	
+		<a >
+			<i class="fa fa-facebook"></i> Ingresar con Facebook
+		</a>
+	</div>
+</div>
+
+<!-- Olvidaste tu Contraseña? -->
+<!-- <div class="login-module">
+	<div class="login-content">
+		<div class="text-center">				
+			<h3 class="login-title login-title-green">
+				¿Olvidaste tu contraseña? <br>
+				<small>Ingresa tu correo y te enviaremos instrucciones para cambiar tu contraseña.</small>
+			</h3>
+		</div>
+	
+		<form class="login-input">	
+			<input 	type="email" 
+					name="email"
+					class="form-control" 
+					placeholder="Correo Electrónico" 
+					autofocus/>
+			<p class="error">No parece un correo correcto</p>
+			<p class="error">El correo es requerido</p>
+		</form>
+		<a 	class="btn btn-success btn-lg col-xs-12"
+			style="margin-bottom: 10px;">
+			Enviar
+		</a>
+	</div>
+</div> -->
+
+<!-- Alert envio de correo -->
+<!-- <div class="login-module text-center">
+	<div class="login-content">
+		<h4><strong>Listo.</strong> Enviaremos las instrucciones a tu correo</h4>
+		<button class="btn btn-link btn-confirmation color" type="button" ng-click="aceptar()">
+			<i class="fa fa-check"></i>
+		</button>
+	</div>
+</div> -->
+
+<!-- Cambiar Contraseña -->
+<!-- <div class="login-module">
+	<div class="login-content">
+		<div class="text-center">				
+			<h3 class="login-title login-title-green">Cambia tu contraseña</h3>
+		</div>
+	
+		<form class="login-input" >	
+			<input type="password" placeholder="Nueva contraseña" class="form-control" autofocus>
+			<input type="password" placeholder="Repite contraseña" class="form-control">
+			<p class="error">Las contraseñas no coinciden</p>
+		</form>
+		<a 	class="btn btn-success btn-lg col-xs-12"
+			style="margin-bottom: 10px;">
+			Aceptar
+		</a>
+	</div>
+</div> -->
+
+<!-- Alert envio de correo -->
+<!-- <div class="login-module text-center">
+	<div class="login-content">
+		<h4>Tu contraseña fue cambiada con éxito</h4>
+		<button class="btn btn-link btn-confirmation color" type="button" ng-click="aceptar()">
+			<i class="fa fa-check"></i>
+		</button>
+	</div>	
+</div> -->
+
+<!-- Cambiar Contraseña -->
+<!-- <div class="login-module">
+	<div class="login-content">
+		<div class="text-center">				
+			<h3 class="login-title login-title-green">
+				Cambia tu contraseña <br>
+				<small>(Esto ocurre cuando el usuario quiere cambiar pass desde dentro de la app)</small>
+			</h3>
+		</div>
+	
+		<form class="login-input" >	
+			<input type="password" placeholder="Contraseña Actual" class="form-control" autofocus>
+			<input type="password" placeholder="Nueva contraseña" class="form-control">
+			<input type="password" placeholder="Repite contraseña" class="form-control">
+			<p class="error">Las contraseñas no coinciden</p>
+		</form>
+		<a 	class="btn btn-success btn-lg col-xs-12"
+			style="margin-bottom: 10px;">
+			Aceptar
+		</a>
+	</div>
+</div> -->

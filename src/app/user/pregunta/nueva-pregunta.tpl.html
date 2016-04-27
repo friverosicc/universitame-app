@@ -1,0 +1,103 @@
+<div 	class="modal" 
+		tabindex="-1" 
+		role="dialog" 
+		ng-controller="nuevaPreguntaController">
+
+	<div class="modal-dialog">
+		<div class="modal-content">						
+			<div class="modal-head modal-question">
+				<h2 class="modal-title var-inline-block">
+					<i class="fa fa-question"></i> Haz una pregunta
+				</h2>
+				<div class="pull-right">
+					<a class="modal-close white" ng-click="$hide()"><i class="fa fa-close"></i></a>
+				</div>
+			</div>
+				
+			<div class="modal-body">				
+				<div class="modal-data-post">
+					<div ng-show="showPhoto" class="post-img-profile" style="background-image: url({{usuario.photo}});"></div>
+					<label href="" class="name">Estás publicando como <strong ng-bind="usuario.nombre"></strong></label>
+				</div>
+
+				<div class="form-inline clearfix modal-spec-data hover">					
+					<a ng-click="mostrarFiltro = !mostrarFiltro">¿Quieres <strong>dirigir</strong> específicamente esta pregunta?</a>
+					<div 	class="row filters" 
+							ng-show="mostrarFiltro" 
+							ng-init="mostrarFiltro = false">
+
+						<div class="form-group col-sm-6 col-xs-12">							
+							<ui-select 	ng-model="publicacion.institucion" 
+										theme="bootstrap" 
+										ng-disabled="disabled" 
+										reset-search-input="false">
+
+								<ui-select-match placeholder="Institución">
+									{{ $select.selected.nombre }}
+								</ui-select-match>
+								
+								<ui-select-choices 	repeat="institucion in instituciones track by $index" 
+													refresh="refrescarInstituciones($select.search)" 
+													refresh-delay="0"> 
+									<div ng-bind-html="institucion.nombre | highlight : $select.search">{{institucion.nombre}}</div>
+								</ui-select-choices>
+							</ui-select>						
+						</div>
+
+						<div class="form-group col-sm-6 col-xs-12">						
+							<ui-select 	ng-model="publicacion.carrera" 
+										theme="bootstrap" 
+										ng-disabled="disabled" 
+										reset-search-input="false">
+										
+								<ui-select-match placeholder="Carrera">{{ $select.selected.nombre }}</ui-select-match>
+								<ui-select-choices 	repeat="carrera in carreras track by $index" 
+													refresh="refrescarCarreras($select.search)"
+													refresh-delay="0"> 
+									<div ng-bind-html="carrera.nombre | highlight : $select.search">{{carrera.nombre}}</div>
+								</ui-select-choices>
+							</ui-select>
+						</div>
+
+					</div>
+				</div>
+				
+				<form name="nuevaPreguntaForm">
+					<div class="col-xs-12 input-nopad">
+						<input 	class="form-control modal-input-width modal-input" 
+								name="titulo" 							
+								ng-model="publicacion.titulo" 
+								ng-required="true"
+								ng-autofocus="{{open}}"
+								placeholder="Título de tu pregunta" 
+								type="text"							
+								tabindex="3">
+						</input>
+					</div>
+
+					<div class="modal-textarea">
+						<textarea 	class="form-control modal-input-width" 
+									rows="5" 
+									tabindex="4"
+									placeholder="Describe tu pregunta de la manera más objetiva y detallada posible, para así 	poder obtener una buena respuesta ;)"
+									id="detalle"
+									ng-model="publicacion.detalle">
+						</textarea>
+
+						<div class="modal-textarea-bottom clearfix">
+							<div class="var-inline-block pull-right">
+								<button class="btn btn-primary btn-sm"
+										tabindex="5"
+										ng-click="publicar()"
+										ng-disabled="!sePuedePublicar()">Publicar
+								</button>
+							</div>						
+						</div>
+					</div>	
+				</form>		
+
+			</div>
+			
+		</div>
+	</div>
+</div>

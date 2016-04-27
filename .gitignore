@@ -1,0 +1,7 @@
+dist/
+node_modules/
+vendor/
+.sass-cache/
+.settings/
+.bundle/
+Gemfile.lock
